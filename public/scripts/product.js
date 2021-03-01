@@ -14,15 +14,15 @@ const setZoomedImgSrc = (e) => {
 };
 
 productImg.addEventListener("click", setZoomedImgSrc);
-
 productThumbnails.forEach((img) => {
   img.addEventListener("click", setZoomedImgSrc);
 });
 
 const closeZoom = (e) => {
-  // if navbar is not hidden and
-  // if user clicks on navbar or hamburger button hide navbar
-  if (!imgZoom.contains(e.target) && e.target !== productImg && !productImgList.contains(e.target)) {
+  // if zoom is not hidden and
+  // if user clicks on img hide navbar
+
+  if (!imgZoom.contains(e.target) && e.target !== productImg && !document.querySelector(".product-images").contains(e.target)) {
     imgZoomContainer.classList.add("hidden");
     window.removeEventListener("click", closeZoom);
   }

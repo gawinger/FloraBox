@@ -1452,9 +1452,37 @@ footer a {
     box-sizing: border-box;
     padding: 10px;
     padding-left: 20px;
+    padding-bottom: 100px;
   }
   .show-product .product-img {
     height: 250px;
+  }
+  .show-product .product-zoom-container {
+    height: 80vh;
+    top: 10vh;
+  }
+  .show-product .product-img-zoom-container {
+    width: 70%;
+    padding-top: 40px;
+  }
+  .show-product .product-img-zoom {
+    text-align: center;
+    height: 60%;
+  }
+  .show-product .product-img-zoom img {
+    height: 90%;
+    border: 1px solid #618b4a;
+  }
+  .show-product .product-img-zoom-list {
+    flex-wrap: wrap;
+  }
+  .show-product .product-img-zoom-list .list-img {
+    width: 45%;
+  }
+  .show-product .product-img-zoom-list img {
+    height: 13vh;
+    width: 100%;
+    border: 1px solid #618b4a;
   }
   .show-product .product-name {
     text-align: center;
@@ -1588,7 +1616,7 @@ footer a {
 @media (max-width: 576px) {
   main {
     width: 90%;
-    margin-left: 2.5%;
+    margin-left: 5%;
   }
   .shop-occasions a {
     font-size: 14px;
