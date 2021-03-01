@@ -1,0 +1,51 @@
+<% layout('./layouts/boilerplate.ejs') %>
+<section class="form-flex">
+  <div class="form-col contact">
+    <h1>Kwiaciarnia</h1>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat dignissimos cumque excepturi voluptatibus repellat neque optio accusantium sapiente ullam placeat. Labore odit dolorum veniam
+      deserunt, reiciendis libero quam et eos!
+    </p>
+    <h3>Godziny otwarcia</h3>
+    <div class="opening-hours">
+      <p>poniedziałek-piątek 7:00 - 15:00</p>
+      <p>sobota 9:00 - 14:00</p>
+      <p>niedziela nieczynne</p>
+    </div>
+    <h3>Kontakt</h3>
+    <div class="address">
+      <p>ul. Siemanko 12</p>
+      <p>43-400 Cieszyn</p>
+    </div>
+    <div class="social">
+      <p>e-mail: email@email.com</p>
+      <p>tel.: +48 555 555 555</p>
+    </div>
+  </div>
+
+  <div class="form form-col contact-form">
+    <p class="p-header">Napisz do Nas</p>
+    <form action="">
+      <label for="topic">Temat</label>
+      <input type="text" name="temat" id="topic" />
+
+      <% if (currentUser){ %>
+      <label for="name">Imię i nazwisko</label>
+      <input type="text" value="<%= currentUser.firstname %> <%= currentUser.lastname %>  " />
+      <label for="e-mail">Adres e-mail do kontaktu</label>
+      <input type="email" name="email" id="email" value="<%= currentUser.email %> " />
+      <% }else{ %>
+      <label for="name">Imię i nazwisko</label>
+      <input type="text" />
+      <label for="e-mail">Adres e-mail do kontaktu</label>
+      <input type="email" name="email" id="email" />
+      <label for="message">Wiadomość</label>
+      <% } %>
+
+      <textarea name="wiadomosc" id="message" cols="30" rows="10"></textarea>
+      <label for="file">Załącz plik</label>
+      <input type="file" name="file" id="file" />
+      <button>Wyślij wiadomość</button>
+    </form>
+  </div>
+</section>

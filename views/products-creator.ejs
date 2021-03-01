@@ -1,0 +1,54 @@
+<% layout('./layouts/boilerplate.ejs') %>
+
+<section class="show-product">
+  <div class="product">
+    <div class="product-col">
+      <div class="product-img">
+        <% if(product.images.length) {%>
+        <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+        <% } %>
+      </div>
+    </div>
+    <div class="product-col">
+      <div class="product-name"><%= product.name %></div>
+      <% if(product.onPromo === "true") {%>
+      <div class="product-price"><span class="product-price-new"><%= product.promoPrice.toFixed(2)%>zł </span><span class="product-price-old"><%= product.price.toFixed(2) %>zł</span></div>
+      <% } else {%>
+      <div class="product-price"><%= product.price.toFixed(2) %>zł</div>
+      <% } %>
+      <span id="variableJSON" hidden> <%= JSON.stringify(product); %> </span>
+      <div class="product-shortDesc"><%= product.shortDesc %></div>
+      <div class="bouquet-creator">
+        <% if(product.creatorData) {%> 
+        <% for (let i = 0; i<product.creatorData.length; i++) {%>
+        <label for=<%= `option${i}` %>><%= product.creatorData[i].categoryName%></label>
+        <select name="<%= product.creatorData[i].categoryName %> " id=<%= `option${i}` %>>
+          <% for(let j = 1; j<=Object.keys(product.creatorData[i]).length-1; j++) {%> 
+          <option value="<%=product.creatorData[i][`option${j}`].optionName %>" data-priceChange = '<%= product.creatorData[i][`option${j}`].priceChange %>'><%= product.creatorData[i][`option${j}`].optionName %></option>
+          
+          <% } %> 
+        </select>
+        <% } %> 
+      </div>
+      <% }%> 
+      <div class="product-description"><%= product.description %></div>
+      <% if(currentUser && currentUser.role === 'admin') {%>
+      <div class="edit">
+        <a href="/kwiaty/edytuj/<%= product.id %> ">Edytuj</a>
+      </div>
+      <form action="/kwiaty/<%= product.id %>?_method=DELETE " method="POST">
+        <button>Delete</button>
+      </form>
+      <% } %>
+      <div class="product-form-buttons">
+        <div class="quantity">
+          <a class="qty-add">+</a>
+          <input type="number" name="quantity" id="quantity" min="1" readonly value="1" />
+          <a class="qty-sub">-</a>
+        </div>
+        <button class="add-to-cart">Dodaj do koszyka <i class="fas fa-cart-plus"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/scripts/creator.js"></script>

@@ -1,0 +1,72 @@
+<% layout('./layouts/boilerplate.ejs') %>
+<section class="show-product">
+  <div class="product">
+    <div class="product-zoom-container hidden">
+      <div class="product-img-zoom-container">
+        <div class="product-img-zoom">
+          <img src="" alt="product-image-zoom" />
+        </div>
+        <div class="product-img-zoom-list">
+          <% product.images.forEach(image=>{ %>
+          <div class="list-img">
+            <img src="/photos/<%= image.filename %> " alt="list-img" />
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+    <div class="product-col">
+      <div class="product-img">
+        <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+      </div>
+      <div class="product-img-list">
+        <% product.images.slice(1).forEach(image=>{ %>
+        <div class="product-thumbnail">
+          <img src="/photos/<%= image.filename %> " alt="product-thumbnail" />
+        </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <div class="product-col product-desc">
+      <div class="product-name"><%= product.name %></div>
+      <% if(product.onPromo === "true") {%>
+      <div class="product-price"><span class="product-price-new"><%= product.promoPrice.toFixed(2)%>zł </span><span class="product-price-old"><%= product.price.toFixed(2) %>zł</span></div>
+      <% } else {%>
+      <div class="product-price"><%= product.price.toFixed(2) %>zł</div>
+      <% } %>
+      <span id="variableJSON" hidden> <%= JSON.stringify(product); %> </span>
+      <div class="product-categories">
+        Kategorie:
+        <div class="product-categories-container">
+          <% product.categories.forEach(category => {%>
+          <div class="product-category"><a href="/kwiaty/okazje/<%= category %>"><%= category.replace('-', ' ') %></a></div>
+          <% }) %>
+        </div>
+      </div>
+      <div class="product-shortDesc"><%= product.shortDesc %></div>
+      <div class="product-description"><%= product.description %></div>
+
+      <% if(currentUser && currentUser.role === 'admin') {%>
+      <div class="admin-btns">
+        <div>
+          <a href="/kwiaty/edytuj/<%= product.id %> "><button class="edit-btn">Edytuj</button></a>
+        </div>
+        <form action="/kwiaty/<%= product.id %>?_method=DELETE " method="POST">
+          <button class="delete-btn">Usuń</button>
+        </form>
+      </div>
+      <% } %>
+      <div class="product-form-buttons">
+        <div class="quantity">
+          <a class="qty-add">+</a>
+          <input type="number" name="quantity" id="quantity" min="1" readonly value="1" />
+          <a class="qty-sub">-</a>
+        </div>
+        <button class="add-to-cart">Dodaj do koszyka <i class="fas fa-cart-plus"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="/scripts/product.js"></script>
+<script src="/scripts/productQuantity.js"></script>

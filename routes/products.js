@@ -1,0 +1,60 @@
+const express = require("express");
+const router = express.Router();
+const multer = require("multer");
+const upload = multer({ dest: "./public/photos/" });
+
+const products = require("../controllers/products");
+const { isAdmin } = require("../public/utils/middleware");
+
+router
+  .route("/kwiaty")
+  // show all products
+  .get(products.productsAll)
+  // create new product
+  .post(isAdmin, upload.array("image"), products.createProduct);
+
+router
+  .route("/kwiaty/okazje")
+  // show all occasions
+  .get(products.occasionsAll);
+
+router
+  .route("/kwiaty/okazje/:category")
+  // show products for occasion
+  .get(products.occasion);
+
+router
+  .route("/kwiaty/kategorie/:type")
+  // show products with category
+  .get(products.category);
+
+router
+  .route("/kwiaty/promocje")
+  // show products on sale
+  .get(products.sale);
+
+router
+  .route("/kwiaty/nowy")
+  // render form to create new product
+  .get(isAdmin, products.createForm);
+
+router
+  .route("/kwiaty/:id")
+  // show product with provided id
+  .get(products.showProduct)
+  // delete product
+  .delete(isAdmin, products.deleteProduct);
+
+router
+  .route("/kwiaty/edytuj/:id")
+  // render form to edit product
+  .get(isAdmin, products.editForm)
+  // edit product
+  .put(isAdmin, upload.array("image"), products.editProduct);
+
+router
+  .route("/kreator")
+  // show bouquet creations
+  .get(products.creators);
+
+module.exports = router;

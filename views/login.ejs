@@ -1,0 +1,28 @@
+<% layout('./layouts/boilerplate.ejs') %>
+<div class="alert-container"><%- include('./partials/flash-alert') %></div>
+<section class="form form-flex login-page">
+  <div class="form-col form-login">
+    <p class="p-header">Zaloguj się</p>
+    <form action="/logowanie" method="POST">
+      <label for="email-login">Email</label>
+      <input type="text" id="email-login" name="email" required />
+      <label for="password-login">Hasło</label>
+      <input type="password" id="password-login" name="password" required />
+      <button>Zaloguj się</button>
+    </form>
+  </div>
+  <div class="form-col">
+    <p class="p-header">Zarejestruj się</p>
+    <form action="/rejestracja" method="POST">
+      <label for="firstname">Imię</label>
+      <input type="text" id="firstname" name="firstname" required />
+      <label for="lastname">Nazwisko</label>
+      <input type="text" id="lastname" name="lastname" required />
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" required />
+      <label for="password">Hasło</label>
+      <input type="password" id="password" name="password" required />
+      <button>Zarejestruj się</button>
+    </form>
+  </div>
+</section>

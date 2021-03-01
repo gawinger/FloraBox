@@ -1,0 +1,43 @@
+<% layout('./layouts/boilerplate.ejs') %>
+<section class="form form-flex">
+  <div class="form form-col">
+    <p class="p-header">Edytuj dane</p>
+    <form action="/moje-konto/<%=currentUser.id%>?_method=PUT" method="POST">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" value="<%=currentUser.email%>" required />
+      <label for="firstname">Imię</label>
+      <input type="text" id="firstname" name="firstname" value="<%=currentUser.firstname%>" required />
+      <label for="lastname">Nazwisko</label>
+      <input type="text" id="lastname" name="lastname" value="<%=currentUser.lastname%>" required />
+      <button>Zapisz dane</button>
+    </form>
+    <div class="address-book">
+      <p class="p-header">Zapisane adresy</p>
+      <% currentUser.addresses.forEach(address=>{ %>
+      <div class="address">
+        <p><span>Miasto:</span> <span class="address-data"><%= address.city %></span></p>
+        <p><span>Kod Pocztowy:</span> <span class="address-data"><%= address.postalCode %></span></p>
+        <p><span>Ulica:</span> <span class="address-data"><%= address.street %></span></p>
+        <p><span>Numer Domu:</span> <span class="address-data"><%= address.number %></span></p>
+        <form class="address-delete" action="/moje-konto/<%= currentUser.id %>/adresy/<%= address.id %>?_method=DELETE  " method="POST">
+          <button><i class="far fa-trash-alt"></i></button>
+        </form>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+  <div class="form form-col">
+    <p class="p-header">Dodaj adres</p>
+    <form action="/moje-konto/<%=currentUser.id%>/adresy" method="POST">
+      <label for="city">Miasto</label>
+      <input type="text" id="city" name="city" required />
+      <label for="postalCode">Kod pocztowy</label>
+      <input type="text" id="postalCode" name="postalCode" required />
+      <label for="street">Ulica</label>
+      <input type="text" id="street" name="street" required />
+      <label for="number">Numer domu</label>
+      <input type="text" id="number" name="number" required />
+      <button>Dodaj Adres</button>
+    </form>
+  </div>
+</section>

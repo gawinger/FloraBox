@@ -1,0 +1,169 @@
+<% layout('./layouts/boilerplate.ejs') %>
+<section class="new-product form">
+  <form action="/kwiaty/edytuj/<%= product.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <label for="name">Nazwa</label>
+    <input type="text" id="name" name="name" value="<%=product.name%>" />
+    <label for="short-description">Krótki Opis - wyświetlany w koszyku (max. 45 znaków)</label>
+    <textarea type="text" id="short-description" name="shortDesc" maxlength="45"><%=product.shortDesc%></textarea>
+    <label for="description">Opis - wyświetlany na stronie produktu (Opcjonalnie)</label>
+    <textarea type="text" id="description" name="description" rows="5"><%=product.description%></textarea>
+    <div class="form-holder">
+      <div>
+        <label for="price">Cena</label>
+        <input type="number" step=".01" id="price" name="price" value="<%=product.price%>" /><span>zł</span>
+      </div>
+      <div class="image-container">
+        <label for="image">Dodaj zdjęcie</label>
+        <input type="file" id="image" name="image" multiple />
+      </div>
+    </div>
+    <div class="form-holder">
+      <div class="select-type">
+        <label for="type">Wybierz typ produktu</label>
+        <select name="type" id="type" data-option="<%= product.type %>">
+          <option value="bukiety">Gotowe Bukiety</option>
+          <option value="creation">Kreator Bukietów</option>
+          <option value="sztuczne">Kwiaty Sztuczne</option>
+          <option value="ciete">Kwiaty Cięte</option>
+          <option value="doniczkowe">Rośliny doniczkowe</option>
+        </select>
+
+        <div class="categories" data-categories="<%= product.categories %>">
+          <p>Wybierz okazje pasujące do produktu</p>
+          <div class="category">
+            <input type="checkbox" name="categories" id="birthday" value="urodziny" />
+            <label for="birthday">Urodziny</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="love" value="dla-zakochanych" />
+            <label for="love">Dla Zakochanych</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="congratulations" value="gratulacje" />
+            <label for="congratulations">Gratulacje</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="apologies" value="przeprosiny" />
+            <label for="apologies">Przperosiny</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="forMother" value="dla-mamy" />
+            <label for="forMother">Dla Mamy</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="forFather" value="dla-taty" />
+            <label for="forFather">Dla Taty</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="wedding" value="na-slub" />
+            <label for="wedding">Na Ślub</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="forGrandparents" value="dla-dziadkow" />
+            <label for="forGrandparents">Dla Babci i Dziadka</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="aniversary" value="rocznica" />
+            <label for="aniversary">Rocznica</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="funeral" value="pogrzeb" />
+            <label for="funeral">Pogrzeb</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="baptism" value="chrzciny" />
+            <label for="baptism">Chrzciny</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="communion" value="komunia" />
+            <label for="communion">Komunia</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="for-her" value="dla-niej" />
+            <label for="for-her">Dla Niej</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="for-him" value="dla-niego" />
+            <label for="for-him">Dla Niego</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="thanks" value="podziekowania" />
+            <label for="thanks">Podziekowania</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="birth" value="narodziny-dziecka" />
+            <label for="birth">Narodziny Dziecka</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="name-day" value="imieniny" />
+            <label for="name-day">Imieniny</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="for-companies" value="dla-firm" />
+            <label for="for-companies">Dla firm</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="easter" value="wielkanoc" />
+            <label for="easter">Wielkanoc</label>
+          </div>
+          <div class="category">
+            <input type="checkbox" name="categories" id="christmas" value="boze-narodzenie" />
+            <label for="christmas">Boże-Narodzenie</label>
+          </div>
+        </div>
+      </div>
+      <div class="select-promotion">
+        <p>Wybierz czy produkt ma być w promocji</p>
+        <div class="promotion" data-promoPrice="<%= product.promoPrice %>" data-promoTime="<%= new Date(product.promoTime).toISOString().slice(0, 10) %>" data-promo="<%= product.onPromo %> ">
+          <div class="promotion-select">
+            <input type="radio" id="promotion" name="onPromo" value="true" />
+            <label for="promotion">Promocja</label>
+          </div>
+          <div class="promotion-select">
+            <input type="radio" id="no-promotion" name="onPromo" value="false" />
+            <label for="no-promotion">Zwykła oferta</label>
+          </div>
+          <div class="prom-details hidden">
+            <label for="promo-price">Cena promocyjna</label>
+            <input type="number" step=".01" id="promo-price" name="promoPrice" /><span>zł</span>
+            <label for="promo-duration">Data zakończenia promocji</label>
+            <input type="date" name="promoTime" id="promo-duration" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="creator hidden">
+      <div class="creator-data">
+        <input type="text" name="creatorAmount" id="categoryAmount" value="1" hidden />
+        <div class="creator-help">
+          <p>Dodaj kategorię kreatora oraz możliwe opcje wyboru dla klienta (max 5 opcji).</p>
+          <p>np. kategoria: Kolor kwiatów</p>
+          <p>opcje: Żółty, Czerwony, Niebieski</p>
+          <p>W polu cena należy wpisać wzrost ceny po wyborze danej opcji, kreator na początku będzie pokazywał klientowi najtańśzy wariant</p>
+        </div>
+        <div class="creator-create" data-categorynum="1">
+          <div class="creator-name">
+            <label for="creator-category-name">Nazwa kategorii</label>
+            <input type="text" name="creatorCategory1" id="option-name" />
+          </div>
+          <div class="creator-options" data-optionamount="1">
+            <div class="creator-option">
+              <label for="option-name">Opcja #1</label>
+              <input type="text" name="creator1Option1" id="option-name" />
+              <label for="option-price">Cena</label>
+              <input type="number" step=".01" name="creator1Option1Change" id="option-price" />
+              <span class="option-number" hidden>1</span>
+            </div>
+            <div class="add-option">
+              <button class="add-option-btn">Dodaj opcję</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="creator-add">Dodaj kategorię</button>
+    </div>
+    <button>Dodaj Produkt</button>
+  </form>
+</section>
+<script src="/scripts/new.js"></script>
+<script src="/scripts/edit.js"></script>
