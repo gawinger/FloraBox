@@ -695,7 +695,9 @@ main {
   }
   .product-desc {
     position: relative;
+    padding-bottom: 100px;
   }
+
   .product-img {
     height: 400px;
     overflow: hidden;
@@ -710,6 +712,9 @@ main {
     img:hover {
       transform: scale(1.1);
     }
+  }
+  .img100 {
+    height: 100%;
   }
   .product-img-list {
     height: 200px;
@@ -746,9 +751,9 @@ main {
   }
   .product-img-zoom {
     height: 70%;
-    overflow: auto;
+    text-align: center;
     img {
-      max-height: 1000px;
+      max-height: 100%;
       max-width: 80vw;
       object-fit: contain;
     }

@@ -776,6 +776,7 @@ main {
 
 .show-product .product-desc {
   position: relative;
+  padding-bottom: 100px;
 }
 
 .show-product .product-img {
@@ -794,6 +795,10 @@ main {
 
 .show-product .product-img img:hover {
   transform: scale(1.1);
+}
+
+.show-product .img100 {
+  height: 100%;
 }
 
 .show-product .product-img-list {
@@ -839,11 +844,11 @@ main {
 
 .show-product .product-img-zoom {
   height: 70%;
-  overflow: auto;
+  text-align: center;
 }
 
 .show-product .product-img-zoom img {
-  max-height: 1000px;
+  max-height: 100%;
   max-width: 80vw;
   object-fit: contain;
 }
