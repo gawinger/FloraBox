@@ -830,6 +830,7 @@ main {
   height: 90vh;
   position: fixed;
   top: 5vh;
+  right: 5vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -842,6 +843,7 @@ main {
   background-color: #f7f7f7;
   border: 1px solid #d8d8d8;
   padding: 20px;
+  min-width: 40%;
 }
 
 .show-product .product-img-zoom {
@@ -853,6 +855,7 @@ main {
   max-height: 100%;
   max-width: 80vw;
   object-fit: contain;
+  border: 2px solid #618b4a;
 }
 
 .show-product .product-img-zoom-list {

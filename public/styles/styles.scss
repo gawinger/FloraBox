@@ -741,6 +741,7 @@ main {
     height: 90vh;
     position: fixed;
     top: 5vh;
+    right: 5vw;
     @include flex_center();
     z-index: 1000;
   }
@@ -750,6 +751,7 @@ main {
     background-color: $background-color;
     border: 1px solid $secondary-color;
     padding: 20px;
+    min-width: 40%;
   }
   .product-img-zoom {
     height: 70%;
@@ -758,6 +760,7 @@ main {
       max-height: 100%;
       max-width: 80vw;
       object-fit: contain;
+      border: 2px solid $main-color;
     }
   }
   .product-img-zoom-list {
