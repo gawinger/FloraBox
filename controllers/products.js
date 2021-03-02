@@ -29,6 +29,7 @@ module.exports.createProduct = async (req, res) => {
   console.log(req.body);
   const product = new Product(req.body);
   // if type of product is creation then add it as products category
+  if (product.categories.includes("bez-okazji")) product.categories = ["bez-okazji"];
   if (req.body.type === "creation") {
     product.categories = ["kreator bukietów"];
     const creatorData = [];
@@ -62,13 +63,13 @@ module.exports.createProduct = async (req, res) => {
   }
   // if user is trying to add more than 5 files flash error
   if (req.files.length > 5) {
-    req.flash("error", "Produkt może mieć maksymalnie 5 zdjęć");
+    req.flash("error", "Produkt może mieć maksymalnie 4 zdjęcia");
     return red.redirect(`/kwiaty/edytuj/${product.id}`);
   }
   // map through provided files and check if files length is lower than 5
   const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
   if (imgs.length + product.images.length >= 5) {
-    req.flash("error", "Produkt może mieć maksymalnie 4 zdjęć");
+    req.flash("error", "Produkt może mieć maksymalnie 4 zdjęcia");
     return res.redirect(`/kwiaty/edytuj/${product.id}`);
   }
   // push images into product object

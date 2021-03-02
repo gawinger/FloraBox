@@ -664,11 +664,14 @@ main {
       font-weight: bold;
     }
   }
-  form {
-    background-color: white;
-    padding: 25px;
+  form,
+  .form-wrapper {
     display: flex;
     flex-direction: column;
+  }
+  form {
+    padding: 25px;
+    background-color: white;
     border: 1px solid $main-color;
   }
   button {
@@ -904,7 +907,8 @@ main {
   }
 }
 
-.new-product {
+.new-product,
+.edit-product {
   label {
     font-size: 19px;
     margin-bottom: 5px;
@@ -924,6 +928,13 @@ main {
     p {
       margin: 0;
       font-size: 20px;
+      margin-bottom: 15px;
+    }
+    .form-subtext {
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+    .form-subtext:last-of-type {
       margin-bottom: 15px;
     }
     label {
@@ -975,6 +986,7 @@ main {
     .promotion {
       display: flex;
       flex-wrap: wrap;
+      height: 220px;
       input {
         margin: 0;
         height: 30px;
@@ -1041,6 +1053,50 @@ main {
   }
 }
 
+.edit-product {
+  .images-edit {
+    margin-bottom: 40px;
+    width: 100%;
+  }
+  .images-edit-list {
+    border: 1px solid $secondary-color;
+    padding: 10px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 100%;
+    @include flex_center();
+  }
+  .image-edit-container {
+    width: 23%;
+    margin: 1%;
+    max-width: 300px;
+    min-width: 100px;
+    position: relative;
+  }
+  .image-edit {
+    width: 100%;
+    object-fit: cover;
+    height: 250px;
+  }
+  .image-delete-form {
+    position: absolute;
+    border: none;
+    padding: 0;
+    width: 100px;
+    right: 0;
+  }
+  .delete-img-btn {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 0;
+    margin: 0;
+    background-color: rgb(180, 73, 73);
+  }
+  .delete-img-btn:hover {
+    background-color: rgb(209, 139, 139);
+  }
+}
 footer {
   background-color: $main-color;
   @include flex_center();
@@ -1124,7 +1180,7 @@ footer {
     position: sticky;
     padding: 0 10%;
     margin-top: -350px;
-    height: 320px;
+    height: 330px;
     background-color: $secondary-color;
     border-bottom: 5px solid $main-color;
   }

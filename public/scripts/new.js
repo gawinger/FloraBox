@@ -1,5 +1,4 @@
 const select = document.querySelector("select");
-const categoriesSelection = document.querySelector(".categories");
 const form = document.querySelector("form");
 const promotion = document.querySelector("#promotion");
 const regular = document.querySelector("#no-promotion");
@@ -87,6 +86,7 @@ regular.addEventListener("change", () => {
   promotionDetails.classList.add("hidden");
 });
 
+// if creation is selected hide categories and show creator options
 select.addEventListener("change", () => {
   if (select.value === "creation") {
     categoriesSelection.classList.add("hidden");
@@ -94,5 +94,16 @@ select.addEventListener("change", () => {
   } else {
     categoriesSelection.classList.remove("hidden");
     creator.classList.add("hidden");
+  }
+});
+
+// if "no-ocassion" is selected hide other categories
+const ocassions = document.querySelectorAll(".categories-select");
+const noOcassion = document.querySelector('.categories input[value="bez-okazji"]');
+noOcassion.addEventListener("change", () => {
+  if (noOcassion.checked === true) {
+    ocassions[0].classList.add("hidden");
+  } else {
+    ocassions[0].classList.remove("hidden");
   }
 });
