@@ -36,6 +36,7 @@
       <div class="product-price"><%= product.price.toFixed(2) %>zł</div>
       <% } %>
       <span id="variableJSON" hidden> <%= JSON.stringify(product); %> </span>
+      <% if(!product.categories.includes('bez-okazji')){ %>
       <div class="product-categories">
         Kategorie:
         <div class="product-categories-container">
@@ -44,6 +45,7 @@
           <% }) %>
         </div>
       </div>
+      <% } %>
       <div class="product-shortDesc"><%= product.shortDesc %></div>
       <div class="product-description"><%= product.description %></div>
 
