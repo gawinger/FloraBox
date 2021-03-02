@@ -50,3 +50,4 @@ const cartAmount = document.querySelector(".cart-products-num");
 const cartValue = document.querySelector(".cart-value");
 const cartMobile = document.querySelector(".cart-mobile");
 const cartMobileAmount = document.querySelector(".cart-mobile-num");
+const cartEmpty = document.querySelector(".cart-empty-msg");

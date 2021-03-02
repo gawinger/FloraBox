@@ -105,7 +105,7 @@ textarea:focus {
   box-sizing: border-box;
   padding: 0 12.5%;
   display: flex;
-  height: 50px;
+  height: 60px;
 }
 
 .header-logo {
@@ -231,6 +231,8 @@ textarea:focus {
 .cart .cart-button {
   position: relative;
   padding-left: 10px;
+  transition: transform 0.5s;
+  cursor: pointer;
 }
 
 .cart .cart-button img {
@@ -255,6 +257,10 @@ textarea:focus {
   pointer-events: none;
 }
 
+.cart .cart-button:hover {
+  transform: scale(1.2);
+}
+
 .cart .cart-sum {
   width: 100%;
   box-sizing: border-box;
@@ -276,6 +282,16 @@ textarea:focus {
   height: 77%;
   overflow-y: auto;
   border-bottom: 1px solid #d8d8d8;
+}
+
+.cart .cart-empty-msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  border-bottom: 1px solid #d8d8d8;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .cart .cart-item {
@@ -309,6 +325,7 @@ textarea:focus {
 .cart .item-name {
   width: 85%;
   font-weight: bold;
+  font-size: 13px;
 }
 
 .cart .item-name:hover {
@@ -336,10 +353,6 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.cart .item-description {
-  font-size: 13px;
 }
 
 .cart-page .cart-items {
@@ -1318,7 +1331,7 @@ footer a {
   }
   header .cart {
     position: absolute;
-    top: 10px;
+    top: 15px;
     right: 120px;
   }
   header .cart span {
@@ -1350,7 +1363,7 @@ footer a {
     display: flex;
     background-color: white;
     box-shadow: 0px 0px 15px #868686;
-    height: 60px;
+    height: 70px;
   }
   .header-main .cart-mobile {
     height: 100%;
@@ -1626,6 +1639,13 @@ footer a {
   .cart-page .payment-btn button {
     width: 200px;
     font-size: 17px;
+  }
+  .item-description,
+  .item-price {
+    font-size: 11px;
+  }
+  .cart-sum span:first-of-type {
+    font-size: 15px;
   }
 }
 

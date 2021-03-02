@@ -115,7 +115,7 @@ textarea:focus {
   box-sizing: border-box;
   padding: 0 12.5%;
   display: flex;
-  height: 50px;
+  height: 60px;
 }
 .header-logo {
   font-size: 25px;
@@ -221,6 +221,8 @@ textarea:focus {
   .cart-button {
     position: relative;
     padding-left: 10px;
+    transition: transform 0.5s;
+    cursor: pointer;
     img {
       width: 40px;
       height: 40px;
@@ -242,6 +244,9 @@ textarea:focus {
       pointer-events: none;
     }
   }
+  .cart-button:hover {
+    transform: scale(1.2);
+  }
   .cart-sum {
     width: 100%;
     box-sizing: border-box;
@@ -261,6 +266,13 @@ textarea:focus {
     height: 77%;
     overflow-y: auto;
     border-bottom: 1px solid $secondary-color;
+  }
+  .cart-empty-msg {
+    @include flex_center();
+    height: 75%;
+    border-bottom: 1px solid $secondary-color;
+    font-weight: bold;
+    font-size: 20px;
   }
   .cart-item {
     display: flex;
@@ -287,6 +299,7 @@ textarea:focus {
   .item-name {
     width: 85%;
     font-weight: bold;
+    font-size: 13px;
   }
   .item-name:hover {
     color: $main-color;
@@ -309,9 +322,6 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-  }
-  .item-description {
-    font-size: 13px;
   }
 }
 // CART PAGE
@@ -1167,7 +1177,7 @@ footer {
     z-index: 1000;
     .cart {
       position: absolute;
-      top: 10px;
+      top: 15px;
       right: 120px;
       span {
         top: -5px !important;
@@ -1197,7 +1207,7 @@ footer {
     display: flex;
     background-color: white;
     box-shadow: 0px 0px 15px rgb(134, 134, 134);
-    height: 60px;
+    height: 70px;
     .cart-mobile {
       height: 100%;
     }
@@ -1489,6 +1499,13 @@ footer {
         font-size: 17px;
       }
     }
+  }
+  .item-description,
+  .item-price {
+    font-size: 11px;
+  }
+  .cart-sum span:first-of-type {
+    font-size: 15px;
   }
 }
 
