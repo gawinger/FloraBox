@@ -604,7 +604,17 @@
   align-items: center;
   flex-direction: column;
   height: 450px;
+  position: relative;
   transition: transform 0.1s;
+}
+
+.products-list .product-hidden {
+  position: absolute;
+  z-index: 100;
+  width: 97%;
+  height: 97%;
+  background-color: rgba(0, 0, 0, 0.308);
+  pointer-events: none;
 }
 
 .products-list .product:hover {
@@ -853,6 +863,35 @@
 
 .show-product .add-to-cart {
   width: 100%;
+}
+
+.show-product .visibility-option {
+  display: flex;
+  align-items: center;
+}
+
+.show-product .visibility-option input {
+  margin: 0;
+}
+
+.show-product .visibility-option label {
+  padding-left: 10px;
+}
+
+.show-product .visibility-btn {
+  padding-top: 5px;
+}
+
+.show-product .visibility-btn button {
+  width: 180px;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #ece074;
+  color: #334827;
+}
+
+.show-product .visibility-btn button:hover {
+  filter: brightness(80%);
 }
 
 .show-product .admin-btns {

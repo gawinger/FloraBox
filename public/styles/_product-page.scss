@@ -180,6 +180,31 @@
   .add-to-cart {
     width: 100%;
   }
+
+  .visibility-option {
+    display: flex;
+    align-items: center;
+    input {
+      margin: 0;
+    }
+    label {
+      padding-left: 10px;
+    }
+  }
+  .visibility-btn {
+    padding-top: 5px;
+    button {
+      width: 180px;
+      padding: 10px;
+      font-size: 18px;
+      background-color: rgb(236, 224, 116);
+      color: darken($main-color, 20%);
+      &:hover {
+        filter: brightness(80%);
+      }
+    }
+  }
+
   .admin-btns {
     display: flex;
     justify-content: flex-end;

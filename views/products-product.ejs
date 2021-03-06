@@ -53,6 +53,22 @@
       <div class="product-description"><%= product.description %></div>
 
       <% if(currentUser && currentUser.role === 'admin') {%>
+      <div class="visibility">
+        <b>Widoczność produktu</b>
+        <form action="/kwiaty/widocznosc/<%= product.id %>?_method=PUT" method="POST">
+          <div class="visibility-option">
+            <input type="radio" name="visibility" id="public" value="public" />
+            <label for="public">Publiczny</label>
+          </div>
+          <div class="visibility-option">
+            <input type="radio" name="visibility" id="hidden" value="hidden" />
+            <label for="hidden">Ukryty</label>
+          </div>
+          <div class="visibility-btn hidden">
+            <button type="submit">Zatwierdź zmianę</button>
+          </div>
+        </form>
+      </div>
       <div class="admin-btns">
         <div>
           <a href="/kwiaty/edytuj/<%= product.id %> "><button class="edit-btn">Edytuj</button></a>
@@ -61,6 +77,7 @@
           <button class="delete-btn">Usuń</button>
         </form>
       </div>
+
       <% } %>
       <div class="product-form-buttons">
         <div class="quantity">

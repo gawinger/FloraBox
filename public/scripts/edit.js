@@ -22,10 +22,15 @@ const promotionStatus = document.querySelectorAll(".promotion-select input");
 const promoPrice = document.querySelector("#promo-price");
 const promoDuration = document.querySelector("#promo-duration");
 
-console.log(promotionContainer.dataset);
-const { promo, promoprice, promotime } = promotionContainer.dataset;
+if (select.value === "creation") {
+  categoriesSelection.classList.add("hidden");
+  creator.classList.remove("hidden");
+} else {
+  categoriesSelection.classList.remove("hidden");
+  creator.classList.add("hidden");
+}
 
-console.log(promoprice);
+const { promo, promoprice, promotime } = promotionContainer.dataset;
 
 promoPrice.value = parseFloat(promoprice);
 promoDuration.value = promotime;

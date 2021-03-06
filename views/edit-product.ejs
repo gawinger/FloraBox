@@ -40,7 +40,7 @@
             <option value="creation">Kreator Bukietów</option>
             <option value="wience">Wieńce pogrzebowe - żywe</option>
             <option value="sztuczne-wience">Wieńce pogrzebowe - sztuczne</option>
-            <option value="flowerboxy">FlowerBox</option>
+            <option value="flowerbox">FlowerBox</option>
             <option value="sztuczne">Kwiaty Sztuczne</option>
             <option value="ciete">Kwiaty Cięte</option>
             <option value="doniczkowe">Rośliny doniczkowe</option>
@@ -50,9 +50,13 @@
             <p>Wybierz okazje pasujące do produktu</p>
             <p class="form-subtext">Kategoria "Bez Okazji" ukrywa kategorie w podglądzie produktu</p>
             <p class="form-subtext">oraz uniemożliwia dodawanie kolejnych kategorii</p>
-            <div class="category">
+            <div class="category no-occasion-container">
               <input type="checkbox" name="categories" id="no-occasion" value="bez-okazji" />
               <label for="no-occasion">Bez Okazji</label>
+            </div>
+            <div class="category funeral-container">
+              <input type="checkbox" name="categories" id="funeral" value="pogrzeb" />
+              <label for="funeral">Pogrzeb</label>
             </div>
             <div class="categories-select">
               <div class="category">
@@ -91,10 +95,7 @@
                 <input type="checkbox" name="categories" id="aniversary" value="rocznica" />
                 <label for="aniversary">Rocznica</label>
               </div>
-              <div class="category">
-                <input type="checkbox" name="categories" id="funeral" value="pogrzeb" />
-                <label for="funeral">Pogrzeb</label>
-              </div>
+
               <div class="category">
                 <input type="checkbox" name="categories" id="baptism" value="chrzciny" />
                 <label for="baptism">Chrzciny</label>

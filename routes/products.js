@@ -52,14 +52,14 @@ router
   .put(isAdmin, upload.array("image"), products.editProduct);
 
 router
+  .route("/kwiaty/widocznosc/:id")
+  // change product visibility
+  .put(isAdmin, products.editVisibility);
+
+router
   .route("/kreator")
   // show bouquet creations
   .get(products.creators);
-
-router
-  .route("/flowerboxy")
-  // show flowerboxes
-  .get(products.flowerboxes);
 
 router
   .route("/wience")

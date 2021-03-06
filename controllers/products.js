@@ -28,8 +28,9 @@ module.exports.productsAll = async (req, res) => {
 module.exports.createProduct = async (req, res) => {
   console.log(req.body);
   const product = new Product(req.body);
-  // if type of product is creation then add it as products category
+  // if type of product is creation, noOccasion or funeral then add it as products category
   if (product.categories.includes("bez-okazji")) product.categories = ["bez-okazji"];
+  if (product.categories.includes("pogrzeb")) product.categories = ["pogrzeb"];
   if (req.body.type === "creation") {
     product.categories = ["kreator bukietów"];
     const creatorData = [];
@@ -141,6 +142,40 @@ module.exports.editForm = async (req, res) => {
 // edit product
 module.exports.editProduct = async (req, res) => {
   const { id } = req.params;
+  // if type of product is creation, noOccasion or funeral then add it as products category
+  if (product.categories.includes("bez-okazji")) product.categories = ["bez-okazji"];
+  if (product.categories.includes("pogrzeb")) product.categories = ["pogrzeb"];
+  if (req.body.type === "creation") {
+    product.categories = ["kreator bukietów"];
+    const creatorData = [];
+    // into creator data push object with category name and options
+    for (let i = 1; i <= req.body.creatorAmount; i++) {
+      creatorData.push({
+        categoryName: req.body[`creatorCategory${i}`],
+        option1: {
+          optionName: req.body[`creator${i}Option1`],
+          priceChange: req.body[`creator${i}Option1Change`],
+        },
+        option2: {
+          optionName: req.body[`creator${i}Option2`],
+          priceChange: req.body[`creator${i}Option2Change`],
+        },
+        option3: {
+          optionName: req.body[`creator${i}Option3`],
+          priceChange: req.body[`creator${i}Option3Change`],
+        },
+        option4: {
+          optionName: req.body[`creator${i}Option4`],
+          priceChange: req.body[`creator${i}Option4Change`],
+        },
+        option5: {
+          optionName: req.body[`creator${i}Option5`],
+          priceChange: req.body[`creator${i}Option5Change`],
+        },
+      });
+    }
+    product.creatorData = creatorData;
+  }
   const product = await Product.findByIdAndUpdate(id, { ...req.body });
   // map through provided files and check if files length is lower than 5
   const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
@@ -159,15 +194,17 @@ module.exports.editProduct = async (req, res) => {
   }
 };
 
+module.exports.editVisibility = async (req, res) => {
+  const { id } = req.params;
+  const product = await Product.findById(id);
+  req.body.visibility === "hidden" ? (product.hidden = true) : (product.hidden = false);
+  await product.save();
+  res.redirect(`/kwiaty/${product.id}`);
+};
+
 // show bouquet creations
 module.exports.creators = async (req, res) => {
   const products = await Product.find({ type: "creation" });
-  res.render("products", { products });
-};
-
-// show flowerboxes
-module.exports.flowerboxes = async (req, res) => {
-  const products = await Product.find({ type: "flowerbox" });
   res.render("products", { products });
 };
 

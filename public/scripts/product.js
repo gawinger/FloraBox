@@ -36,3 +36,11 @@ const zoomListImgs = document.querySelectorAll(".product-img-zoom-list img");
 zoomListImgs.forEach((e) => {
   e.addEventListener("click", setZoomedImgSrc);
 });
+
+const visibilty = document.querySelector(".visibility");
+
+if (visibilty) {
+  visibilty.addEventListener("change", () => {
+    document.querySelector(".visibility-btn").classList.remove("hidden");
+  });
+}

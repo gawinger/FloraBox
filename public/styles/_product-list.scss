@@ -11,7 +11,17 @@
     @include flex_center();
     flex-direction: column;
     height: 450px;
+    position: relative;
     transition: transform 0.1s;
+  }
+
+  .product-hidden {
+    position: absolute;
+    z-index: 100;
+    width: 97%;
+    height: 97%;
+    background-color: rgba(0, 0, 0, 0.308);
+    pointer-events: none;
   }
 
   .product:hover {

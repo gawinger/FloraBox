@@ -86,6 +86,7 @@ regular.addEventListener("change", () => {
   promotionDetails.classList.add("hidden");
 });
 
+const categoriesSelection = document.querySelector(".categories");
 // if creation is selected hide categories and show creator options
 select.addEventListener("change", () => {
   if (select.value === "creation") {
@@ -98,12 +99,26 @@ select.addEventListener("change", () => {
 });
 
 // if "no-ocassion" is selected hide other categories
-const ocassions = document.querySelectorAll(".categories-select");
+const ocassions = document.querySelector(".categories-select");
 const noOcassion = document.querySelector('.categories input[value="bez-okazji"]');
-noOcassion.addEventListener("change", () => {
-  if (noOcassion.checked === true) {
-    ocassions[0].classList.add("hidden");
-  } else {
-    ocassions[0].classList.remove("hidden");
-  }
+const noOcassionContainer = document.querySelector(".no-occasion-container");
+const funeral = document.querySelector('.categories input[value="pogrzeb"]');
+const funeralContainer = document.querySelector(".funeral-container");
+
+funeral.addEventListener("change", () => {
+  hideCategories(funeral, noOcassionContainer);
 });
+noOcassion.addEventListener("change", () => {
+  hideCategories(noOcassion, funeralContainer);
+});
+
+const hideCategories = (select, toHide) => {
+  console.log(select);
+  if (select.checked === true) {
+    toHide.classList.add("hidden");
+    ocassions.classList.add("hidden");
+  } else {
+    toHide.classList.remove("hidden");
+    ocassions.classList.remove("hidden");
+  }
+};
