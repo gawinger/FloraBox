@@ -1,0 +1,30 @@
+@import "config";
+
+.flash-alert {
+  width: auto;
+  max-width: 100%;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  padding-left: 20px;
+  button {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: black;
+    @include flex_center();
+  }
+}
+
+.flash-error {
+  background-color: #f39b9b;
+  border: 1px solid #ff4b4b;
+}
+
+.flash-success {
+  background-color: rgb(167, 247, 167);
+  border: 1px solid rgb(68, 245, 68);
+}

@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const upload = multer({ dest: "./public/photos/" });
-
 const products = require("../controllers/products");
 const { isAdmin } = require("../public/utils/middleware");
 
@@ -56,5 +55,30 @@ router
   .route("/kreator")
   // show bouquet creations
   .get(products.creators);
+
+router
+  .route("/flowerboxy")
+  // show flowerboxes
+  .get(products.flowerboxes);
+
+router
+  .route("/wience")
+  // show all wreaths
+  .get(products.allWreaths);
+
+router
+  .route("/pogrzeb")
+  // show funeral products
+  .get(products.funeral);
+
+router
+  .route("/pogrzeb/wience")
+  // show wreaths
+  .get(products.wreaths);
+
+router
+  .route("/pogrzeb/wience-sztuczne")
+  // show wreaths
+  .get(products.artificialWreaths);
 
 module.exports = router;

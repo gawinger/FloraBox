@@ -1,0 +1,40 @@
+@import "config";
+
+//FORM
+.form {
+  .form-col {
+    width: 40%;
+    .login-header {
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+  form,
+  .form-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  form {
+    padding: 25px;
+    background-color: white;
+    border: 1px solid $main-color;
+  }
+  button {
+    margin: auto;
+    margin-top: 15px;
+    width: 250px;
+  }
+}
+.form-flex {
+  min-height: 600px;
+  display: flex;
+  justify-content: space-around;
+  width: 95%;
+  .contact {
+    width: 50%;
+    box-sizing: border-box;
+  }
+  .contact-form {
+    width: 50%;
+  }
+}

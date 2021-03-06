@@ -1,0 +1,43 @@
+@import "config";
+
+@media (max-width: 576px) {
+  main {
+    width: 90%;
+    margin-left: 5%;
+  }
+  .shop-occasions {
+    a {
+      font-size: 14px;
+    }
+  }
+  .products-list {
+    .product {
+      height: 200px;
+    }
+    .product-details {
+      a {
+        font-size: 14px;
+      }
+    }
+    .product-name {
+      padding-top: 5px;
+      line-height: 12px;
+    }
+    .product-img {
+      height: 130px;
+    }
+    .product-price {
+      font-size: 14px;
+    }
+  }
+  .address {
+    p {
+      font-size: 11px;
+    }
+  }
+  .flash-alert {
+    p {
+      font-size: 11px;
+    }
+  }
+}

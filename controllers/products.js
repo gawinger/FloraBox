@@ -164,3 +164,33 @@ module.exports.creators = async (req, res) => {
   const products = await Product.find({ type: "creation" });
   res.render("products", { products });
 };
+
+// show flowerboxes
+module.exports.flowerboxes = async (req, res) => {
+  const products = await Product.find({ type: "flowerbox" });
+  res.render("products", { products });
+};
+
+// show all wreaths
+module.exports.allWreaths = async (req, res) => {
+  const products = await Product.find({ type: ["wience", "sztuczne-wience"] });
+  res.render("wreaths", { products });
+};
+
+// show funeral
+module.exports.funeral = async (req, res) => {
+  const products = await Product.find({ categories: { $in: "pogrzeb" } });
+  res.render("products", { products });
+};
+
+// show wreaths
+module.exports.wreaths = async (req, res) => {
+  const products = await Product.find({ type: "wience" });
+  res.render("products", { products });
+};
+
+// show wreaths
+module.exports.artificialWreaths = async (req, res) => {
+  const products = await Product.find({ type: "sztuczne-wience" });
+  res.render("products", { products });
+};

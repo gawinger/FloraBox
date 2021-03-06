@@ -1,0 +1,50 @@
+@import "config";
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  .product {
+    width: 25%;
+    margin: 10px 0;
+    box-sizing: border-box;
+    padding: 1.5%;
+    @include flex_center();
+    flex-direction: column;
+    height: 450px;
+    transition: transform 0.1s;
+  }
+
+  .product:hover {
+    transform: scale(1.02);
+    background-color: white;
+    border: 1px solid $secondary-color;
+  }
+
+  .product-description {
+    padding-top: 20px;
+    height: 40%;
+    text-align: center;
+  }
+  .product-img {
+    width: 100%;
+    height: 80%;
+    border: 2px solid $main-color;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .product-details {
+    box-sizing: border-box;
+    width: 100%;
+    height: 20%;
+    padding: 5%;
+    text-align: center;
+    font-size: 25px;
+  }
+  .product-name {
+    font-size: 17px;
+    font-weight: bold;
+  }
+}

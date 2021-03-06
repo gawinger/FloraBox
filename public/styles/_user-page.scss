@@ -1,0 +1,30 @@
+@import "config";
+
+// USER PAGE
+.address-book {
+  padding-top: 50px;
+  .address {
+    padding: 15px 90px 15px 30px;
+    position: relative;
+    border: 1px solid $secondary-color;
+    background-color: white;
+    margin-bottom: 30px;
+    p {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px;
+      border-bottom: 1px solid $secondary-color;
+    }
+  }
+  .address-delete {
+    top: 45px;
+    right: 25px;
+    position: absolute;
+    border: none;
+    padding: 0;
+    button {
+      width: 40px;
+      background-color: rgb(156, 63, 63);
+    }
+  }
+}

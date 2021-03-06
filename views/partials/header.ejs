@@ -1,0 +1,78 @@
+<header class="header">
+    <div class="header-nav">
+      
+      <div class="header-item social">
+        <div class="header-social"><i class="fab fa-facebook"></i>/kwiaciarnia</div>
+        <div class="header-social"><i class="far fa-envelope"></i>email@email.com</div>
+      </div>
+  
+      <div class="header-item login/register">
+        <% if (!currentUser) {%>
+        <div class="header-btn">
+          <a href="/logowanie">Zaloguj</a>
+        </div>
+        <div class="header-btn">
+          <a href="/logowanie">Zarejestruj</a>
+        </div>
+        <% }else {%>
+        <div class="header-btn">
+          <a href="/moje-konto/<%=currentUser.id%>">Konto</a>
+        </div>
+        <div class="header-btn">
+          <a href="/wyloguj">Wyloguj</a>
+        </div>
+        <% } %>
+      </div>
+    </div>
+    <div class="header-main">
+      <div class="header-logo">
+        <a href="/">FloraBox</a>
+      </div>
+      <div class="mobile-logo"><a href="/">FloraBox</a> </div>
+      <form autocomplete="off" action="/kwiaty">
+        <div class="header-search-container">
+          <input name="q" type="text" placeholder="Wpisz czego szukasz ..." />
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </form>
+      <div class="header-utilities">
+        <div class="phone util"><i class="fas fa-phone-alt"></i> 555 555 555</div>
+        <button id="hamburger">
+          <svg viewBox="0 0 100 80" width="50" height="40">
+            <rect width="100" height="7"></rect>
+            <rect y="30" width="100" height="7"></rect>
+            <rect y="60" width="100" height="7"></rect>
+          </svg>
+        </button>
+        <% if (typeof url === 'undefined'){%>
+        <div class="cart-total util">0.00</div>
+        <div class="mobile-container">
+          <div class="user">
+            <a href="/moje-konto/:id"><i class="far fa-user"></i></a>
+          </div>
+  
+        </div>
+      </div>
+        <div class="cart">
+          <div class="cart-button util">
+            <img src="/images/shopping-cart.svg" alt="shopping-cart" />
+            <span class="cart-products-num hidden"></span>
+          </div>
+          <div class="cart-show hidden">
+            <div class="cart-empty-msg">
+              Twój koszyk jest pusty
+            </div>
+            <div class="cart-sum">
+              <span>Wartość koszyka:</span>
+              <span class="sum-value">0.00</span>
+            </div>
+            <div class="see-cart">
+              <a href="/koszyk"><button>Zobacz koszyk</button></a>
+            </div>
+            <div class="cart-items"></div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </header>

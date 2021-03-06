@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+$background-color: #f7f7f7;
+$main-color: #618b4a;
+$secondary-color: rgb(216, 216, 216);
+$text-color: #000000;
+
+@mixin flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

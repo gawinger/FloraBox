@@ -47,6 +47,9 @@ const ProductSchema = new mongoose.Schema({
   creatorData: {
     type: mongoose.Schema.Types.Mixed,
   },
+  hidden: {
+    type: Boolean,
+  },
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

@@ -1,0 +1,46 @@
+@import "config";
+
+@media (max-width: 1400px) {
+  main {
+    width: 90%;
+  }
+  .header-main {
+    padding: 0 7%;
+    justify-content: space-between;
+  }
+  .header-logo {
+    font-size: 25px;
+    font-weight: bold;
+  }
+  .phone {
+    padding: 5px 30px 5px 10px !important;
+    width: 200px;
+  }
+  .header-search-container {
+    margin-left: 70px;
+    width: 300px;
+    input {
+      font-size: 17px;
+    }
+  }
+  .cart {
+    .cart-show {
+      right: 100px;
+    }
+  }
+
+  .cart-total {
+    right: 10% !important;
+  }
+  .products-list {
+    .product {
+      width: 30%;
+      height: 400px;
+      margin: auto;
+      margin-bottom: 25px;
+    }
+    .product-img {
+      height: 300px;
+    }
+  }
+}

@@ -1,0 +1,264 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+.new-product label,
+.edit-product label {
+  font-size: 19px;
+  margin-bottom: 5px;
+}
+
+.new-product input,
+.new-product textarea,
+.new-product select,
+.edit-product input,
+.edit-product textarea,
+.edit-product select {
+  font-size: 17px;
+  padding: 5px 10px;
+}
+
+.new-product textarea,
+.edit-product textarea {
+  resize: vertical;
+}
+
+.new-product .form-holder,
+.edit-product .form-holder {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-product .form-holder p,
+.edit-product .form-holder p {
+  margin: 0;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.new-product .form-holder .form-subtext,
+.edit-product .form-holder .form-subtext {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.new-product .form-holder .form-subtext:last-of-type,
+.edit-product .form-holder .form-subtext:last-of-type {
+  margin-bottom: 15px;
+}
+
+.new-product .form-holder label,
+.edit-product .form-holder label {
+  display: block;
+}
+
+.new-product .form-holder #price,
+.edit-product .form-holder #price {
+  width: 70px;
+}
+
+.new-product .form-holder span,
+.edit-product .form-holder span {
+  padding-left: 10px;
+}
+
+.new-product .form-holder .image-container,
+.edit-product .form-holder .image-container {
+  width: 70%;
+}
+
+.new-product .form-holder #image,
+.edit-product .form-holder #image {
+  width: 100%;
+  height: 47px;
+  box-sizing: border-box;
+}
+
+.new-product .select-type,
+.edit-product .select-type {
+  width: 45%;
+}
+
+.new-product .select-type label,
+.edit-product .select-type label {
+  display: block;
+}
+
+.new-product .select-type .categories,
+.edit-product .select-type .categories {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-product .select-type .categories input,
+.edit-product .select-type .categories input {
+  margin: 0;
+  height: 30px;
+}
+
+.new-product .select-type .categories label,
+.edit-product .select-type .categories label {
+  margin: 0;
+  height: 30px;
+  padding-left: 10px;
+}
+
+.new-product .select-type .category,
+.edit-product .select-type .category {
+  display: flex;
+  height: 30px;
+}
+
+.new-product .select-promotion,
+.edit-product .select-promotion {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-product .select-promotion .promotion,
+.edit-product .select-promotion .promotion {
+  display: flex;
+  flex-wrap: wrap;
+  height: 220px;
+}
+
+.new-product .select-promotion .promotion input,
+.edit-product .select-promotion .promotion input {
+  margin: 0;
+  height: 30px;
+}
+
+.new-product .select-promotion .promotion label,
+.edit-product .select-promotion .promotion label {
+  padding: 0 10px;
+}
+
+.new-product .select-promotion .promotion-select,
+.edit-product .select-promotion .promotion-select {
+  margin-bottom: 20px;
+  width: 50%;
+  display: flex;
+}
+
+.new-product .select-promotion .prom-details,
+.edit-product .select-promotion .prom-details {
+  width: 100%;
+}
+
+.new-product .select-promotion #promo-price,
+.edit-product .select-promotion #promo-price {
+  width: 70px;
+}
+
+.new-product .select-promotion span,
+.edit-product .select-promotion span {
+  padding-left: 10px;
+}
+
+.new-product .creator-create,
+.edit-product .creator-create {
+  display: flex;
+  border-top: 2px solid #618b4a;
+  margin-top: 25px;
+  padding-top: 25px;
+  flex-wrap: wrap;
+}
+
+.new-product .creator-create .creator-help,
+.edit-product .creator-create .creator-help {
+  width: 100%;
+}
+
+.new-product .creator-create .creator-options,
+.new-product .creator-create .creator-name,
+.edit-product .creator-create .creator-options,
+.edit-product .creator-create .creator-name {
+  width: 50%;
+  box-sizing: border-box;
+  padding-right: 5%;
+}
+
+.new-product .creator-create .creator-name label,
+.edit-product .creator-create .creator-name label {
+  display: block;
+}
+
+.new-product .creator-create .creator-name input,
+.edit-product .creator-create .creator-name input {
+  width: 100%;
+}
+
+.new-product .creator-create .creator-option,
+.edit-product .creator-create .creator-option {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-product .creator-create .creator-option label,
+.edit-product .creator-create .creator-option label {
+  text-align: end;
+  width: 280px;
+}
+
+.new-product .creator-create .creator-option input,
+.edit-product .creator-create .creator-option input {
+  margin-left: 10px;
+  width: 70%;
+  height: 25px;
+}
+
+.new-product .creator-create .creator-option #option-price,
+.edit-product .creator-create .creator-option #option-price {
+  width: 50px;
+}
+
+.edit-product .images-edit {
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.edit-product .images-edit-list {
+  border: 1px solid #d8d8d8;
+  padding: 10px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-product .image-edit-container {
+  width: 23%;
+  margin: 1%;
+  max-width: 300px;
+  min-width: 100px;
+  position: relative;
+}
+
+.edit-product .image-edit {
+  width: 100%;
+  object-fit: cover;
+  height: 250px;
+}
+
+.edit-product .image-delete-form {
+  position: absolute;
+  border: none;
+  padding: 0;
+  width: 100px;
+  right: 0;
+}
+
+.edit-product .delete-img-btn {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 0;
+  margin: 0;
+  background-color: #b44949;
+}
+
+.edit-product .delete-img-btn:hover {
+  background-color: #d18b8b;
+}
+/*# sourceMappingURL=new-edit-product.css.map */

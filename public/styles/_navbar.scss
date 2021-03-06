@@ -1,0 +1,77 @@
+@import "config";
+
+// NAVBAR
+
+.navbar {
+  position: sticky;
+  top: 0;
+  box-shadow: 0px 0px 15px rgb(134, 134, 134);
+  background-color: white;
+  justify-content: flex-end;
+  z-index: 100;
+  a {
+    min-width: 100px;
+    height: 100%;
+    font-size: 17px;
+    @include flex_center();
+    transition: all 0.3s ease-out;
+  }
+  a:hover {
+    color: $main-color;
+  }
+  .dropdown-content {
+    position: absolute;
+    width: auto;
+
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0px 0px 15px rgb(134, 134, 134);
+    background-color: white;
+    display: none;
+    a {
+      z-index: 100;
+      padding: 0 20px;
+      height: 40px;
+      font-size: 17px;
+      border-bottom: 1px solid $secondary-color;
+    }
+    a:last-of-type {
+      border-bottom: none;
+    }
+    a:hover {
+      background-color: $main-color;
+      color: white;
+    }
+  }
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  i {
+    padding-left: 5px;
+  }
+  li {
+    width: auto;
+    padding: 0 15px;
+    list-style-type: none;
+  }
+
+  li:hover .dropdown-content {
+    display: block;
+  }
+}
+
+.admin-nav {
+  background-color: $main-color;
+  top: 50px;
+  a {
+    min-width: 100px;
+    height: 100%;
+    font-size: 20px;
+    @include flex_center();
+    color: white;
+  }
+}

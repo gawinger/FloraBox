@@ -1,0 +1,104 @@
+@import "config";
+
+.header-mobile,
+.mobile-container,
+.mobile-logo,
+#hamburger {
+  display: none;
+}
+.header {
+  i {
+    padding-right: 5px;
+    font-size: 25px;
+  }
+}
+
+.header-nav,
+.navbar,
+.header-main,
+.admin-nav {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 2.5%;
+  display: flex;
+  height: 60px;
+}
+.header-main {
+  padding: 0 12.5%;
+}
+.header-logo {
+  font-size: 25px;
+  font-weight: bold;
+  max-width: 200px;
+}
+.header-nav {
+  background-color: $main-color;
+  justify-content: space-between;
+  color: white;
+}
+
+.header-item {
+  display: flex;
+  .header-social {
+    padding-right: 30px;
+    @include flex_center();
+  }
+  .header-btn {
+    width: 100px;
+    padding: 0px 20px;
+    background-color: #a2bb94;
+    border-right: 5px solid $main-color;
+    @include flex_center();
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  .header-btn:hover {
+    font-size: 18px;
+    background-color: #d6dfd0;
+  }
+}
+
+.header-main {
+  align-items: center;
+  justify-content: space-between;
+  height: 150px;
+}
+
+.header-search-container {
+  width: 450px;
+  border: 1px solid $secondary-color;
+  @include flex_center();
+  input {
+    height: 50px;
+    flex: 1;
+    border: none;
+    padding: 0;
+    margin: 0;
+    padding-left: 10px;
+    font-size: 20px;
+  }
+  input:focus {
+    outline: none;
+  }
+  button {
+    height: 50px;
+    width: 50px;
+  }
+}
+.header-utilities {
+  display: flex;
+  .util {
+    @include flex_center();
+    padding-left: 20px;
+  }
+  .phone {
+    font-size: 20px;
+    padding-right: 50px;
+    padding-top: 5px;
+  }
+  .cart-total {
+    font-size: 25px;
+    position: absolute;
+    right: 15%;
+  }
+}
