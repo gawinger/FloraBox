@@ -75,6 +75,7 @@ module.exports.createProduct = async (req, res) => {
   }
   // push images into product object
   product.images.push(...imgs);
+  product.hidden = true;
   await product.save();
   res.redirect(`kwiaty/${product.id}`);
 };
@@ -185,6 +186,7 @@ module.exports.editProduct = async (req, res) => {
   } else {
     // push images into product object
     product.images.push(...imgs);
+    product.hidden = true;
     await product.save();
     if (product.type === "creation") {
       res.redirect(`/kreator/${product.id}`);
@@ -194,6 +196,7 @@ module.exports.editProduct = async (req, res) => {
   }
 };
 
+// change visibility of products
 module.exports.editVisibility = async (req, res) => {
   const { id } = req.params;
   const product = await Product.findById(id);

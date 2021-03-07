@@ -2,7 +2,6 @@
 <section>
   <div class="products-list">
     <% products.forEach(product=>{ %>
-      <% console.log(product.hidden) %> 
       <% if(product.hidden  && currentUser && currentUser.role !== 'admin') {} %>
       <% if(product.hidden && currentUser && currentUser.role === 'admin') { %>
         

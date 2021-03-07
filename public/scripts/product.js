@@ -39,6 +39,7 @@ zoomListImgs.forEach((e) => {
 
 const visibilty = document.querySelector(".visibility");
 
+// if user sees visibility option add listener of change and show confirm button
 if (visibilty) {
   visibilty.addEventListener("change", () => {
     document.querySelector(".visibility-btn").classList.remove("hidden");

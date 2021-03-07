@@ -9,15 +9,20 @@ const methodOverride = require("method-override");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
 const session = require("express-session")({
-  secret: "secret",
+  name: "session",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  httpOnly: true,
+  expires: Date.now() + 1000 * 60 + 60 * 24 * 7,
+  maxAge: 1000 * 60 + 60 * 24 * 7,
 });
 
 const app = express();
 const path = require("path");
-
 
 const User = require("./models/user");
 
@@ -32,9 +37,9 @@ app.set("views", path.join(__dirname, "/views"));
 app.set("view engine", "ejs");
 
 // routes
-const usersRoutes = require('./routes/users')
-const productsRoutes = require('./routes/products')
-const homeRoutes = require('./routes/home')
+const usersRoutes = require("./routes/users");
+const productsRoutes = require("./routes/products");
+const homeRoutes = require("./routes/home");
 
 // Database connection
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/scouter";
@@ -58,6 +63,12 @@ const LocalStrategy = require("passport-local").Strategy;
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(
+  mongoSanitize({
+    replaceWith: "_",
+  })
+);
+app.use(helmet({ contentSecurityPolicy: false }));
 
 passport.use(new LocalStrategy({ usernameField: "email" }, User.authenticate()));
 passport.serializeUser(User.serializeUser());
@@ -73,9 +84,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', usersRoutes)
-app.use('/', productsRoutes)
-app.use('/', homeRoutes)
+app.use("/", usersRoutes);
+app.use("/", productsRoutes);
+app.use("/", homeRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
