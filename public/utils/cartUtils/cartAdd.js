@@ -30,6 +30,8 @@ const addToCart = async (product, id) => {
     //update localStorage
     updateCart();
   }
+  const addAlert = document.querySelector(".cart-add-alert");
+  addAlert.classList.remove("hidden");
 };
 
 // if product type is 'creation' then render information about it differently

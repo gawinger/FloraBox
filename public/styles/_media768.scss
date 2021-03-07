@@ -92,4 +92,15 @@
   .cart-sum span:first-of-type {
     font-size: 15px;
   }
+  .cart-add-alert {
+    height: 50px;
+    padding-right: 10px;
+    .check {
+      display: none;
+    }
+    .close {
+      right: 10px;
+      top: 5px;
+    }
+  }
 }

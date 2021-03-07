@@ -3,7 +3,7 @@ const navbar = document.querySelector(".navbar");
 const li = document.querySelector(".nav-list");
 
 const closeNav = (e) => {
-  // if navbar is not hidden and 
+  // if navbar is not hidden and
   // if user clicks on navbar or hamburger button hide navbar
   if (!navbar.contains(e.target) && e.target !== hamBtn) {
     navbar.classList.remove("show-nav");
@@ -28,4 +28,9 @@ dropdownLinks.forEach((e) => {
       e.parentNode.lastElementChild.classList.toggle("mobile-show");
     }
   });
+});
+
+const closeAlertBtn = document.querySelector(".cart-add-alert .close");
+closeAlertBtn.addEventListener("click", () => {
+  document.querySelector(".cart-add-alert").classList.add("hidden");
 });
