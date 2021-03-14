@@ -1,4 +1,4 @@
-@import "config", "navbar", "cart", "header", "flash", "home-page", "cart-page", "product-list", "product-page", "user-page", "form", "new-edit-product", "media1400", "media1024", "media768",
+@import "config", "main", "navbar", "cart", "header", "flash", "home-page", "cart-page", "product-list", "product-page", "user-page", "form", "new-edit-product", "media1400", "media1024", "media768",
   "media576";
 body {
   margin: 0;
@@ -52,14 +52,6 @@ textarea:focus {
 
 .hidden {
   display: none !important;
-}
-
-// MAIN
-main {
-  width: 75%;
-  padding-top: 50px;
-  padding-bottom: 150px;
-  margin: auto;
 }
 
 .p-header {

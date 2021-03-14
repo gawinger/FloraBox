@@ -96,6 +96,11 @@
     right: 20px;
     font-size: 20px;
     color: black;
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
   .check {
     font-size: 70px;

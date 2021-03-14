@@ -1,16 +1,16 @@
 <% layout('./layouts/boilerplate.ejs') %>
 <section>
     <div class="shop-occasions">
-        <a href="/pogrzeb/wience">Wieńce z kwiatów żywych</a>
-        <a href="/pogrzeb/wience-sztuczne">Wieńce z kwiatów sztucznych</a>
+        <a href="/pogrzeb/wience" title="Wieńce z żywych kwiatów">Wieńce z kwiatów żywych</a>
+        <a href="/pogrzeb/wience-sztuczne" title="Wieńce z kwiatów sztucznych">Wieńce z kwiatów sztucznych</a>
     </div>
     <div class="products-list">
     <% products.forEach(product=>{ %>
     <div class="product">
-      <a href="/kwiaty/<%= product.id %> ">
+      <a href="/kwiaty/<%= product.id %>" title="<%= product.name %> ">
       <div class="product-img">
         <% if(product.images.length) {%>
-        <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+        <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
         <% } %>
       </a>
       </div>

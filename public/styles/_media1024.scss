@@ -229,8 +229,9 @@
       width: 100%;
       box-sizing: border-box;
       padding: 10px;
-      padding-left: 20px;
-      padding-bottom: 100px;
+      &:last-of-type {
+        padding-bottom: 100px;
+      }
     }
     .product-img {
       height: 250px;
@@ -284,6 +285,7 @@
       font-weight: bold;
     }
     .product-price {
+      padding-left: 30px;
       font-size: 25px;
       padding-bottom: 10px;
     }

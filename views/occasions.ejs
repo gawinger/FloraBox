@@ -2,40 +2,40 @@
 <section>
     <div class="shop-occasions">
         <p class="p-header">Wybierz okazję</p>
-          <a href="okazje/urodziny">Urodziny</a>
-          <a href="okazje/dla-zakochanych">Dla Zakochanych</a>
-          <a href="okazje/gratulacje">Gratulacje</a>
-          <a href="/okazje/przeprosiny">Przeprosiny</a>
-          <a href="/okazje/dla-mamy">Dla Mamy</a>
-          <a href="/okazje/dla-taty">Dla Taty</a>
-          <a href="/okazje/na-slub">Ślub</a>
-          <a href="/okazje/dla-dziadkow">Dla Dziadków</a>
-          <a href="/okazje/rocznica">Rocznica</a>
-          <a href="/okazje/pogrzeb">Pogrzeb</a>
-          <a href="/okazje/chrzciny">Chrzciny</a>
-          <a href="/okazje/komunia">Komunia</a>
-          <a href="/okazje/dla-niej">Dla Niej</a>
-          <a href="/okazje/dla niego">Dla Niego</a>
-          <a href="/okazje/podziekowania">Podziękowania</a>
-          <a href="/okazje/narodziny-dziecka">Narodziny Dziecka</a>
-          <a href="/okazje/imieniny">Imieniny</a>
-          <a href="/okazje/dla-firm">Dla firm</a>
-          <a href="/okazje/wielkanoc">Wielkanoc</a>
-          <a href="/okazje/boze-narodzenie">Boże Narodzenie</a>
+          <a href="okazje/urodziny" title="Urodziny">Urodziny</a>
+          <a href="okazje/dla-zakochanych" title="Dla zakochanych">Dla Zakochanych</a>
+          <a href="okazje/gratulacje" title="Gratulacje">Gratulacje</a>
+          <a href="/okazje/przeprosiny" title="Przeprosiny">Przeprosiny</a>
+          <a href="/okazje/dla-mamy" title="Dla Mamy">Dla Mamy</a>
+          <a href="/okazje/dla-taty" title="Dla Taty">Dla Taty</a>
+          <a href="/okazje/na-slub" title="Ślub">Ślub</a>
+          <a href="/okazje/dla-dziadkow" title="Dla Dziadków">Dla Dziadków</a>
+          <a href="/okazje/rocznica" title="Rocznica">Rocznica</a>
+          <a href="/okazje/pogrzeb" title="Pogrzeb">Pogrzeb</a>
+          <a href="/okazje/chrzciny" title="Chrzciny">Chrzciny</a>
+          <a href="/okazje/komunia" title="Komunia">Komunia</a>
+          <a href="/okazje/dla-niej" title="Dla Niej">Dla Niej</a>
+          <a href="/okazje/dla niego" title="Dla Niego">Dla Niego</a>
+          <a href="/okazje/podziekowania" title="Podziękowania">Podziękowania</a>
+          <a href="/okazje/narodziny-dziecka" title="Narodziny dziecka">Narodziny Dziecka</a>
+          <a href="/okazje/imieniny" title="Imieniny">Imieniny</a>
+          <a href="/okazje/dla-firm" title="Dla firm">Dla firm</a>
+          <a href="/okazje/wielkanoc" title="Wielkanoc">Wielkanoc</a>
+          <a href="/okazje/boze-narodzenie" title="Boże Narodzenie">Boże Narodzenie</a>
       </div>    
   <div class="products-list">
     <p class="p-header">Nasza oferta</p>
     <% products.forEach(product=>{ %>
     <div class="product">
-      <a href="/kwiaty/<%= product.id %> ">
+      <a href="/kwiaty/<%= product.id %>" title="<%= product.name %>">
       <div class="product-img">
         <% if(product.images.length) {%>
-        <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+        <img src="/photos/<%= product.images[0].filename %>" alt="<%= product.name %>" />
         <% } %>
       </a>
       </div>
       <div class="product-details">
-        <div class="product-name"><a href="/kwiaty/<%= product.id %> "><%= product.name %></a></div>
+        <div class="product-name"><a href="/kwiaty/<%= product.id %>" title="<%= product.name %>"><%= product.name %></a></div>
         <% if(product.onPromo === "true") {%>
           <div class="product-promo"></div>
         <div class="product-price"><span class="product-price-new"><%= product.promoPrice.toFixed(2)%>zł </span><span class="product-price-old"><%= product.price.toFixed(2) %>zł</span></div>

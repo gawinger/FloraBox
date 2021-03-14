@@ -10,12 +10,12 @@
           <a href="/kwiaty/<%= product.id %> ">
           <div class="product-img">
             <% if(product.images.length) {%>
-              <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+              <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
               <% } %>
             </a>
             </div>
             <div class="product-details">
-              <div class="product-name"><a href="/kwiaty/<%= product.id %> "><%= product.name %></a></div>
+              <div class="product-name"><a href="/kwiaty/<%= product.id %>" title="<%= product.name %>"><%= product.name %></a></div>
               <% if(product.onPromo === "true") {%>
                 <div class="product-promo"></div>
               <div class="product-price"><span class="product-price-new"><%= product.promoPrice.toFixed(2)%>zł </span><span class="product-price-old"><%= product.price.toFixed(2) %>zł</span></div>
@@ -27,15 +27,15 @@
       <% } %>
     <% if(!product.hidden) {%>
       <div class="product">
-        <a href="/kwiaty/<%= product.id %> ">
+        <a href="/kwiaty/<%= product.id %>" title="<%= product.name %>">
         <div class="product-img">
           <% if(product.images.length) {%>
-            <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+            <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
             <% } %>
           </a>
           </div>
           <div class="product-details">
-            <div class="product-name"><a href="/kwiaty/<%= product.id %> "><%= product.name %></a></div>
+            <div class="product-name" title="<%= product.name %>"><a href="/kwiaty/<%= product.id %> "><%= product.name %></a></div>
             <% if(product.onPromo === "true") {%>
               <div class="product-promo"></div>
             <div class="product-price"><span class="product-price-new"><%= product.promoPrice.toFixed(2)%>zł </span><span class="product-price-old"><%= product.price.toFixed(2) %>zł</span></div>
@@ -47,5 +47,4 @@
       <% } %>
   <% }) %>
   </div>
-
 </section>

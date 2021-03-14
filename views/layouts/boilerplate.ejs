@@ -1,9 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl-PL">
   <head>
     <meta charset="UTF-8" />
+    <!-- META VIEWPORT -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FloraBox</title>
+    <!-- META EDGE -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- TITLE -->
+    <title>FloraBox - kwiaciarnia internetowa</title>
+    <!-- META DESCRIPTION -->
+    <meta name="description" content="Kwiaciarnia internetowa działająca na terenie Śląska Cieszyńskiego. Mamy w ofercie bukiety, wieńce, flowerbox, kwiaty cięte i sztuczne, rośliny doniczkowe." />
+    <!-- KETA KEYWORDS -->
+    <meta
+      name="keywords"
+      content="KWIATY, KWIACIARNIA, KWIACIARNIA INTERNETOWA, BUKIETY, FLOWERBOX, WIEŃCE, WIEŃCE POGRZEBOWE, ROŚLINY, ROŚLINY DONICZKOWE, KWIATY CIĘTE, KWIATY SZTUCZNE, RÓŻE, OKAZJE, PREZENT, CIESZYN, USTROŃ, SKOCZÓW, ŚLĄSK CIESZYŃSKI, WIĄZANKI, WIĄZANKI ŚLUBNE, KWIATY NA POGRZEB, KWIATY NA PRZEPROSINY, GRATULACJE"
+    />
+    <!-- META AUTHOR -->
+    <meta name="author" content="Bartosz Czupryna" />
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
@@ -11,13 +24,14 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="/styles/css/styles.css" />
-    <link rel="icon" type="image/png" href="/images/sunflower.png" />
+    <link rel="shortcut icon" type="image/ico" href="/images/sunflower.png" />
   </head>
   <body>
     <%- include('../partials/header') %> <%- include('../partials/navbar') %>
     <main><%- body %></main>
     <%- include('../partials/footer') %>
   </body>
+
   <% if (typeof url === 'undefined'){%>
   <script type="text/javascript" src="/utils/cartUtils/cartUpdate.js"></script>
   <script type="text/javascript" src="/utils/cartUtils/cartRemove.js"></script>

@@ -5,7 +5,7 @@
     <div class="product-col">
       <div class="product-img">
         <% if(product.images.length) {%>
-        <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+        <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
         <% } %>
       </div>
     </div>
@@ -34,7 +34,7 @@
       <div class="product-description"><%= product.description %></div>
       <% if(currentUser && currentUser.role === 'admin') {%>
       <div class="edit">
-        <a href="/kwiaty/edytuj/<%= product.id %> ">Edytuj</a>
+        <a href="/kwiaty/edytuj/<%= product.id %>">Edytuj</a>
       </div>
       <form action="/kwiaty/<%= product.id %>?_method=DELETE " method="POST">
         <button>Delete</button>
@@ -42,9 +42,9 @@
       <% } %>
       <div class="product-form-buttons">
         <div class="quantity">
-          <a class="qty-add">+</a>
+          <a class="qty-add" title="zwiększ ilość">+</a>
           <input type="number" name="quantity" id="quantity" min="1" readonly value="1" />
-          <a class="qty-sub">-</a>
+          <a class="qty-sub" title="zmniejsz ilość">-</a>
         </div>
         <button class="add-to-cart">Dodaj do koszyka <i class="fas fa-cart-plus"></i></button>
       </div>

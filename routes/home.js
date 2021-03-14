@@ -33,4 +33,7 @@ router.delete("/kwiaty/:id/photos/:photoId", async (req, res) => {
   res.redirect(`/kwiaty/edytuj/${id}`);
 });
 
+router.get("/zamowienia", async (req, res) => {
+  res.render("orders");
+});
 module.exports = router;

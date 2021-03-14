@@ -7,12 +7,12 @@
       </button>
       <div class="product-img-zoom-container">
         <div class="product-img-zoom">
-          <img src="" alt="product-image-zoom" />
+          <img src="" alt="<%= product.name %>" />
         </div>
         <div class="product-img-zoom-list">
           <% product.images.forEach(image=>{ %>
           <div class="list-img">
-            <img src="/photos/<%= image.filename %> " alt="list-img" />
+            <img src="/photos/<%= image.filename %> " alt="<%= product.name %>" />
           </div>
           <% }) %>
         </div>
@@ -20,12 +20,12 @@
     </div>
     <div class="product-col product-images">
       <div class="product-img">
-        <img src="/photos/<%= product.images[0].filename %> " alt="product-image" />
+        <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
       </div>
       <div class="product-img-list">
         <% product.images.slice(1).forEach(image=>{ %>
         <div class="product-thumbnail">
-          <img src="/photos/<%= image.filename %> " alt="product-thumbnail" />
+          <img src="/photos/<%= image.filename %> " alt="<%= product.name %>" />
         </div>
         <% }) %>
       </div>
@@ -44,7 +44,7 @@
         Kategorie:
         <div class="product-categories-container">
           <% product.categories.forEach(category => {%>
-          <div class="product-category"><a href="/kwiaty/okazje/<%= category %>"><%= category.replace('-', ' ') %></a></div>
+          <div class="product-category"><a href="/kwiaty/okazje/<%= category %>" title="<%= category %>"><%= category.replace('-', ' ') %></a></div>
           <% }) %>
         </div>
       </div>
@@ -71,7 +71,7 @@
       </div>
       <div class="admin-btns">
         <div>
-          <a href="/kwiaty/edytuj/<%= product.id %> "><button class="edit-btn">Edytuj</button></a>
+          <a href="/kwiaty/edytuj/<%= product.id %> " title="Edytuj"><button class="edit-btn">Edytuj</button></a>
         </div>
         <form action="/kwiaty/<%= product.id %>?_method=DELETE " method="POST">
           <button class="delete-btn">Usuń</button>
@@ -81,9 +81,9 @@
       <% } %>
       <div class="product-form-buttons">
         <div class="quantity">
-          <a class="qty-add">+</a>
+          <a class="qty-add" title="zwiększ ilość">+</a>
           <input type="number" name="quantity" id="quantity" min="1" readonly value="1" />
-          <a class="qty-sub">-</a>
+          <a class="qty-sub" title="zmniejsz ilość">-</a>
         </div>
         <button class="add-to-cart">Dodaj do koszyka <i class="fas fa-cart-plus"></i></button>
       </div>

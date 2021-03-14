@@ -1,47 +1,46 @@
 <% if (typeof currentUser !== 'undefined' && currentUser.role === "admin") {%>
 <div class="admin-nav">
   <ul class="nav-list">
-    <li>
-      <a href="/kwiaty/nowy" class="nav-link">+ Dodaj Produkt</a>
-    </li>
+    <li><a href="/kwiaty/nowy" title="Nowy produkt" class="nav-link">+ Dodaj Produkt</a></li>
+    <li><a href="/zamowienia" title="Menu zamówień" class="nav-link">Zarządzanie Zamowieniami</a></li>
   </ul>
 </div>
 <% } %>
 <nav class="navbar">
   <ul class="nav-list">
     <li>
-      <a class="nav-link dropdown-link" href="/kwiaty">Kwiaty<i class="fas fa-angle-down"></i></a>
+      <a class="nav-link dropdown-link" href="/kwiaty" title="Wszystkie Kwiaty">Kwiaty<i class="fas fa-angle-down"></i></a>
       <div class="dropdown-content">
-        <a href="/kwiaty/kategorie/bukiety">Bukiety</a>
-        <a href="/kwiaty/kategorie/ciete">Kwiaty cięte</a>
-        <a href="/kwiaty/kategorie/sztuczne">Kwiaty sztuczne</a>
-        <a href="/kwiaty/kategorie/doniczkowe">Rośliny doniczkowe</a>
+        <a href="/kwiaty/kategorie/bukiety" title="Bukiety">Bukiety</a>
+        <a href="/kwiaty/kategorie/ciete" title="Kwiaty Cięte">Kwiaty cięte</a>
+        <a href="/kwiaty/kategorie/sztuczne" title="Kwiaty Sztuczne">Kwiaty sztuczne</a>
+        <a href="/kwiaty/kategorie/doniczkowe" title="Rośliny doniczkowe">Rośliny doniczkowe</a>
       </div>
     </li>
-    <li><a class="nav-link" href="/kwiaty/kategorie/flowerbox">FlowerBox</a></li>
+    <li><a class="nav-link" href="/kwiaty/kategorie/flowerbox" title="FlowerBox">FlowerBox</a></li>
     <li>
-      <a class="nav-link dropdown-link" href="/pogrzeb">Pogrzebowe <i class="fas fa-angle-down"></i></a>
+      <a class="nav-link dropdown-link" href="/pogrzeb" title="Pogrzebowe">Pogrzebowe <i class="fas fa-angle-down"></i></a>
       <div class="dropdown-content">
-        <a href="/pogrzeb/wience/">Wieńce - kwiaty żywe</a>
-        <a href="/pogrzeb/wience-sztuczne">Wieńce - kwiaty sztuczne</a>
+        <a href="/pogrzeb/wience/" title="Wieńce z żywych kwiatów">Wieńce - kwiaty żywe</a>
+        <a href="/pogrzeb/wience-sztuczne" title="Wieńce z kwiatów sztucznych">Wieńce - kwiaty sztuczne</a>
       </div>
     </li>
-    <li><a class="nav-link" href="/kreator">Kreator bukietów</a></li>
+    <li><a class="nav-link" href="/kreator" title="Kreator bukietów">Kreator bukietów</a></li>
     <li>
-      <a class="nav-link dropdown-link" href="/kwiaty/okazje">Okazje <i class="fas fa-angle-down"></i></a>
+      <a class="nav-link dropdown-link" href="/kwiaty/okazje" title="Wszystkie okazje">Okazje <i class="fas fa-angle-down"></i></a>
       <div class="dropdown-content">
-        <a href="/kwiaty/okazje/urodziny">Urodziny</a>
-        <a href="/kwiaty/okazje/dla-zakochanych">Dla Zakochanych</a>
-        <a href="/kwiaty/okazje/dla-mamy">Dla Mamy</a>
-        <a href="/kwiaty/okazje/dla-taty">Dla Taty</a>
-        <a href="/kwiaty/okazje/na-slub">Ślub</a>
-        <a href="/kwiaty/okazje/pogrzeb">Pogrzeb</a>
-        <a href="/kwiaty/okazje/dla-firm">Dla firm</a>
-        <a href="/kwiaty/okazje">Więcej okazji ></a>
+        <a href="/kwiaty/okazje/urodziny" title="Urodziny">Urodziny</a>
+        <a href="/kwiaty/okazje/dla-zakochanych" title="Dla zakochanych">Dla Zakochanych</a>
+        <a href="/kwiaty/okazje/dla-mamy" title="Dla Mamy">Dla Mamy</a>
+        <a href="/kwiaty/okazje/dla-taty" title="Dla Taty">Dla Taty</a>
+        <a href="/kwiaty/okazje/na-slub" title="Ślub">Ślub</a>
+        <a href="/kwiaty/okazje/pogrzeb" title="Pogrzeb">Pogrzeb</a>
+        <a href="/kwiaty/okazje/dla-firm" title="Dla firm">Dla firm</a>
+        <a href="/kwiaty/okazje" title="Wszystkie okazje">Więcej okazji ></a>
       </div>
     </li>
-    <li><a class="nav-link" href="/kwiaty/promocje">Promocje</a></li>
-    <li><a class="nav-link" href="/kontakt">Kontakt</a></li>
+    <li><a class="nav-link" href="/kwiaty/promocje" title="Wyświetl produkty w promocji">Promocje</a></li>
+    <li><a class="nav-link" href="/kontakt" title="Dane kontaktowe">Kontakt</a></li>
   </ul>
 </nav>
 <div class="cart-add-alert hidden">

@@ -14,6 +14,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+main {
+  width: 75%;
+  padding-top: 50px;
+  padding-bottom: 150px;
+  margin: auto;
+}
+
 .navbar {
   position: sticky;
   top: 0;
@@ -124,6 +131,12 @@
   right: 20px;
   font-size: 20px;
   color: black;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.cart-add-alert .close:hover {
+  transform: scale(1.2);
 }
 
 .cart-add-alert .check {
@@ -1598,7 +1611,8 @@
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
-    padding-left: 20px;
+  }
+  .show-product .product-col:last-of-type {
     padding-bottom: 100px;
   }
   .show-product .product-img {
@@ -1653,6 +1667,7 @@
     font-weight: bold;
   }
   .show-product .product-price {
+    padding-left: 30px;
     font-size: 25px;
     padding-bottom: 10px;
   }
@@ -1824,7 +1839,10 @@
     font-size: 11px;
   }
   .add-to-cart {
-    padding: 0;
+    padding: 0 10px;
+  }
+  .show-product .product-price {
+    padding-left: 0;
   }
 }
 
@@ -1881,13 +1899,6 @@ textarea:focus {
 
 .hidden {
   display: none !important;
-}
-
-main {
-  width: 75%;
-  padding-top: 50px;
-  padding-bottom: 150px;
-  margin: auto;
 }
 
 .p-header {
