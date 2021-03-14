@@ -698,6 +698,22 @@ main {
   font-weight: bold;
 }
 
+.display-amount {
+  margin-top: -20px;
+  text-align: end;
+  font-size: 15px;
+}
+
+.display-amount select {
+  margin-left: 5px;
+  font-size: 16px;
+  width: 60px;
+}
+
+.display-amount select option {
+  font-size: 15px;
+}
+
 .product-page {
   display: flex;
   justify-content: center;

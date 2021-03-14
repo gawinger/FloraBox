@@ -6,23 +6,27 @@ function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
-const limit = 12;
+// Pagination functionality
+async function pagination(collection, p, l) {
+  let page = 1;
+  limit = 12;
+  if (p) page = parseInt(p);
+  if (l) limit = parseInt(l);
+  const skip = (page - 1) * limit;
+  return await collection.skip(skip).limit(limit);
+}
 
 // Get amount of products
-async function getProductNum(collection, user) {
+async function getProductNum(collection, user, l) {
   let productsAmount = (await collection.countDocuments({})) - (await collection.countDocuments({ hidden: true }));
   if (user && user.role === "admin") {
     productsAmount = await collection.countDocuments({});
   }
+  if (!productsAmount) productsAmount = 0;
+  console.log(l);
+  let limit = 12;
+  if (l) limit = parseInt(l);
   return productsAmount / limit;
-}
-
-// Pagination functionality
-async function pagination(collection, p) {
-  let page = 1;
-  if (p) page = parseInt(p);
-  const skip = (page - 1) * limit;
-  return await collection.skip(skip).limit(limit);
 }
 
 // show all product
@@ -38,8 +42,8 @@ module.exports.productsAll = async (req, res) => {
       }
     });
   } else {
-    const productsAmount = await getProductNum(Product.find({}), res.locals.currentUser);
-    const products = await pagination(Product.find({}), req.query.p);
+    const productsAmount = await getProductNum(Product.find({}), res.locals.currentUser, req.query.limit);
+    const products = await pagination(Product.find({}), req.query.p, req.query.limit);
     res.render("products", { products, productsAmount });
   }
 };
@@ -96,31 +100,31 @@ module.exports.createProduct = async (req, res) => {
 
 // show all occasions
 module.exports.occasionsAll = async (req, res) => {
-  const productsAmount = await getProductNum(Product.find({}), res.locals.currentUser);
-  const products = await pagination(Product.find({}), req.query.p);
+  const productsAmount = await getProductNum(Product.find({}), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({}), req.query.p, req.query.limit);
   res.render("occasions", { products, productsAmount });
 };
 
 // show prodcuts for occasion
 module.exports.occasion = async (req, res) => {
   const { category } = req.params;
-  const productsAmount = await getProductNum(Product.find({ categories: { $in: [category] } }), res.locals.currentUser);
-  const products = await pagination(Product.find({ categories: { $in: [category] } }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ categories: { $in: [category] } }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ categories: { $in: [category] } }), req.query.p, req.query.limit);
   res.render("products", { products, productsAmount });
 };
 
 // show prodcuts with category
 module.exports.category = async (req, res) => {
   const { type } = req.params;
-  const productsAmount = await getProductNum(Product.find({ type: type }), res.locals.currentUser);
-  const products = await pagination(Product.find({ type: type }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ type: type }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ type: type }), req.query.p, req.query.limit);
   res.render("products", { products, productsAmount });
 };
 
 // show prodcuts on sale
 module.exports.sale = async (req, res) => {
-  const productsAmount = await getProductNum(Product.find({ onPromo: true }), res.locals.currentUser);
-  const products = await pagination(Product.find({ onPromo: true }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ onPromo: true }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ onPromo: true }), req.query.p, req.query.limit);
   res.render("products", { products, productsAmount });
 };
 
@@ -166,33 +170,22 @@ module.exports.editProduct = async (req, res) => {
   if (product.categories.includes("pogrzeb")) product.categories = ["pogrzeb"];
   if (req.body.type === "creation") {
     product.categories = ["kreator bukietów"];
-    const creatorData = [];
-    // into creator data push object with category name and options
-    for (let i = 1; i <= req.body.creatorAmount; i++) {
-      creatorData.push({
-        categoryName: req.body[`creatorCategory${i}`],
-        option1: {
-          optionName: req.body[`creator${i}Option1`],
-          priceChange: req.body[`creator${i}Option1Change`],
-        },
-        option2: {
-          optionName: req.body[`creator${i}Option2`],
-          priceChange: req.body[`creator${i}Option2Change`],
-        },
-        option3: {
-          optionName: req.body[`creator${i}Option3`],
-          priceChange: req.body[`creator${i}Option3Change`],
-        },
-        option4: {
-          optionName: req.body[`creator${i}Option4`],
-          priceChange: req.body[`creator${i}Option4Change`],
-        },
-        option5: {
-          optionName: req.body[`creator${i}Option5`],
-          priceChange: req.body[`creator${i}Option5Change`],
-        },
-      });
+    const optionData = {};
+    // add category name to optionData object
+    optionData.categoryName = req.body[`creatorCategory${i}`];
+    // iterate throught all options and add them to optionData object
+    for (let j = 1; j <= optionAmount; j++) {
+      // if priceChange value is not provided set it to 0
+      if (req.body[`creator${i}Option${j}Change`] === "") {
+        req.body[`creator${i}Option${j}Change`] = 0;
+      }
+      optionData["option" + j] = {
+        optionName: req.body[`creator${i}Option${j}`],
+        priceChange: req.body[`creator${i}Option${j}Change`],
+      };
     }
+    // push option data into creator data
+    creatorData.push(optionData);
     product.creatorData = creatorData;
   }
   const product = await Product.findByIdAndUpdate(id, { ...req.body });
@@ -225,35 +218,35 @@ module.exports.editVisibility = async (req, res) => {
 
 // show bouquet creations
 module.exports.creators = async (req, res) => {
-  const productsAmount = await getProductNum(Product.find({ type: "creation" }), res.locals.currentUser);
-  const products = await pagination(Product.find({ type: "creation" }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ type: "creation" }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ type: "creation" }), req.query.p, req.query.limit);
   res.render("products", { products, productsAmount });
 };
 
 // show all wreaths
 module.exports.allWreaths = async (req, res) => {
-  const productsAmount = await getProductNum(Product.find({ type: ["wience", "sztuczne-wience"] }), res.locals.currentUser);
-  const products = await pagination(Product.find({ type: ["wience", "sztuczne-wience"] }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ type: ["wience", "sztuczne-wience"] }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ type: ["wience", "sztuczne-wience"] }), req.query.p, req.query.limit);
   res.render("wreaths", { products, productsAmount });
 };
 
 // show funeral
 module.exports.funeral = async (req, res) => {
-  const productsAmount = await getProductNum(Product.find({ categories: { $in: "pogrzeb" } }), res.locals.currentUser);
-  const products = await pagination(Product.find({ categories: { $in: "pogrzeb" } }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ categories: { $in: "pogrzeb" } }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ categories: { $in: "pogrzeb" } }), req.query.p, req.query.limit);
   res.render("products", { products, productsAmount });
 };
 
 // show wreaths
 module.exports.wreaths = async (req, res) => {
-  const productsAmount = await getProductNum(Product.find({ type: "wience" }), res.locals.currentUser);
-  const products = await pagination(Product.find({ type: "wience" }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ type: "wience" }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ type: "wience" }), req.query.p, req.query.limit);
   res.render("products", { products, productsAmount });
 };
 
 // show wreaths
 module.exports.artificialWreaths = async (req, res) => {
-  const productsAmount = await getProductNum(Product.find({ type: "sztuczne-wience" }), res.locals.currentUser);
-  const products = await pagination(Product.find({ type: "sztuczne-wience" }), req.query.p);
+  const productsAmount = await getProductNum(Product.find({ type: "sztuczne-wience" }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ type: "sztuczne-wience" }), req.query.p, req.query.limit);
   res.render("products", { products, productsAmount });
 };
