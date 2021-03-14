@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({ dest: "./public/photos/" });
+const storage = multer.memoryStorage();
+const uploads = multer({ storage });
 const products = require("../controllers/products");
 const { isAdmin } = require("../public/utils/middleware");
 
@@ -10,7 +11,7 @@ router
   // show all products
   .get(products.productsAll)
   // create new product
-  .post(isAdmin, upload.array("image"), products.createProduct);
+  .post(isAdmin, uploads.array("image"), products.createProduct);
 
 router
   .route("/kwiaty/okazje")
@@ -49,7 +50,7 @@ router
   // render form to edit product
   .get(isAdmin, products.editForm)
   // edit product
-  .put(isAdmin, upload.array("image"), products.editProduct);
+  .put(isAdmin, uploads.array("image"), products.editProduct);
 
 router
   .route("/kwiaty/widocznosc/:id")

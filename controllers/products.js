@@ -26,7 +26,6 @@ module.exports.productsAll = async (req, res) => {
 
 // create new product
 module.exports.createProduct = async (req, res) => {
-  console.log(req.body);
   const product = new Product(req.body);
   // if type of product is creation, noOccasion or funeral then add it as products category
   if (product.categories.includes("bez-okazji")) product.categories = ["bez-okazji"];
@@ -36,29 +35,24 @@ module.exports.createProduct = async (req, res) => {
     const creatorData = [];
     // into creator data push object with category name and options
     for (let i = 1; i <= req.body.creatorAmount; i++) {
-      creatorData.push({
-        categoryName: req.body[`creatorCategory${i}`],
-        option1: {
-          optionName: req.body[`creator${i}Option1`],
-          priceChange: req.body[`creator${i}Option1Change`],
-        },
-        option2: {
-          optionName: req.body[`creator${i}Option2`],
-          priceChange: req.body[`creator${i}Option2Change`],
-        },
-        option3: {
-          optionName: req.body[`creator${i}Option3`],
-          priceChange: req.body[`creator${i}Option3Change`],
-        },
-        option4: {
-          optionName: req.body[`creator${i}Option4`],
-          priceChange: req.body[`creator${i}Option4Change`],
-        },
-        option5: {
-          optionName: req.body[`creator${i}Option5`],
-          priceChange: req.body[`creator${i}Option5Change`],
-        },
-      });
+      const keys = Object.keys(req.body);
+      const optionAmount = keys.filter((key) => key.includes(`creator${i}Option`)).length / 2;
+      const optionData = {};
+      // add category name to optionData object
+      optionData.categoryName = req.body[`creatorCategory${i}`];
+      // iterate throught all options and add them to optionData object
+      for (let j = 1; j <= optionAmount; j++) {
+        // if priceChange value is not provided set it to 0
+        if (req.body[`creator${i}Option${j}Change`] === "") {
+          req.body[`creator${i}Option${j}Change`] = 0;
+        }
+        optionData["option" + j] = {
+          optionName: req.body[`creator${i}Option${j}`],
+          priceChange: req.body[`creator${i}Option${j}Change`],
+        };
+      }
+      // push option data into creator data
+      creatorData.push(optionData);
     }
     product.creatorData = creatorData;
   }
