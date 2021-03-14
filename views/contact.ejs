@@ -28,7 +28,6 @@
     <form action="">
       <label for="topic">Temat</label>
       <input type="text" name="temat" id="topic" />
-
       <% if (currentUser){ %>
       <label for="name">Imię i nazwisko</label>
       <input type="text" value="<%= currentUser.firstname %> <%= currentUser.lastname %>  " />
@@ -41,7 +40,6 @@
       <input type="email" name="email" id="email" />
       <label for="message">Wiadomość</label>
       <% } %>
-
       <textarea name="wiadomosc" id="message" cols="30" rows="10"></textarea>
       <label for="file">Załącz plik</label>
       <input type="file" name="file" id="file" />

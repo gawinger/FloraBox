@@ -46,5 +46,12 @@
     </div>
     <% }) %>
   </div>
-
+  <% if(productsAmount > 1){ %> 
+  <div class="product-page">
+    <a href="/kwiaty">1</a>
+    <% for(let i=2; i <= productsAmount; i++){ %> 
+    <a href="/kwiaty?p=<%= i %>"><%= i %></a>
+    <% } %> 
+  </div>
+  <% } %> 
 </section>

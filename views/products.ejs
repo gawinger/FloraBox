@@ -4,7 +4,6 @@
     <% products.forEach(product=>{ %>
       <% if(product.hidden  && currentUser && currentUser.role !== 'admin') {} %>
       <% if(product.hidden && currentUser && currentUser.role === 'admin') { %>
-        
         <div class="product">
           <div class="product-hidden"></div>
           <a href="/kwiaty/<%= product.id %> ">
@@ -46,5 +45,15 @@
         </div>
       <% } %>
   <% }) %>
+
   </div>
+  <% if(productsAmount > 1){ %>  
+    <div class="product-page">
+      <a href="/kwiaty" class="page-1">1</a>
+      <% for(let i=2; i <= productsAmount; i++){ %> 
+      <a href="/kwiaty?p=<%= i %>" class="page-<%=i%>"><%= i %></a>
+      <% } %> 
+    </div>
+    <% } %> 
 </section>
+<script src="/scripts/productsPage.js"></script>

@@ -6,6 +6,25 @@ function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 }
 
+const limit = 12;
+
+// Get amount of products
+async function getProductNum(collection, user) {
+  let productsAmount = (await collection.countDocuments({})) - (await collection.countDocuments({ hidden: true }));
+  if (user && user.role === "admin") {
+    productsAmount = await collection.countDocuments({});
+  }
+  return productsAmount / limit;
+}
+
+// Pagination functionality
+async function pagination(collection, p) {
+  let page = 1;
+  if (p) page = parseInt(p);
+  const skip = (page - 1) * limit;
+  return await collection.skip(skip).limit(limit);
+}
+
 // show all product
 module.exports.productsAll = async (req, res) => {
   if (req.query.q) {
@@ -19,8 +38,9 @@ module.exports.productsAll = async (req, res) => {
       }
     });
   } else {
-    const products = await Product.find({});
-    res.render("products", { products });
+    const productsAmount = await getProductNum(Product.find({}), res.locals.currentUser);
+    const products = await pagination(Product.find({}), req.query.p);
+    res.render("products", { products, productsAmount });
   }
 };
 
@@ -76,28 +96,32 @@ module.exports.createProduct = async (req, res) => {
 
 // show all occasions
 module.exports.occasionsAll = async (req, res) => {
-  const products = await Product.find({});
-  res.render("occasions", { products });
+  const productsAmount = await getProductNum(Product.find({}), res.locals.currentUser);
+  const products = await pagination(Product.find({}), req.query.p);
+  res.render("occasions", { products, productsAmount });
 };
 
 // show prodcuts for occasion
 module.exports.occasion = async (req, res) => {
   const { category } = req.params;
-  const products = await Product.find({ categories: { $in: [category] } });
-  res.render("products", { products });
+  const productsAmount = await getProductNum(Product.find({ categories: { $in: [category] } }), res.locals.currentUser);
+  const products = await pagination(Product.find({ categories: { $in: [category] } }), req.query.p);
+  res.render("products", { products, productsAmount });
 };
 
 // show prodcuts with category
 module.exports.category = async (req, res) => {
   const { type } = req.params;
-  const products = await Product.find({ type: type });
-  res.render("products", { products });
+  const productsAmount = await getProductNum(Product.find({ type: type }), res.locals.currentUser);
+  const products = await pagination(Product.find({ type: type }), req.query.p);
+  res.render("products", { products, productsAmount });
 };
 
 // show prodcuts on sale
 module.exports.sale = async (req, res) => {
-  const products = await Product.find({ onPromo: true });
-  res.render("products", { products });
+  const productsAmount = await getProductNum(Product.find({ onPromo: true }), res.locals.currentUser);
+  const products = await pagination(Product.find({ onPromo: true }), req.query.p);
+  res.render("products", { products, productsAmount });
 };
 
 // render form to create new product
@@ -201,30 +225,35 @@ module.exports.editVisibility = async (req, res) => {
 
 // show bouquet creations
 module.exports.creators = async (req, res) => {
-  const products = await Product.find({ type: "creation" });
-  res.render("products", { products });
+  const productsAmount = await getProductNum(Product.find({ type: "creation" }), res.locals.currentUser);
+  const products = await pagination(Product.find({ type: "creation" }), req.query.p);
+  res.render("products", { products, productsAmount });
 };
 
 // show all wreaths
 module.exports.allWreaths = async (req, res) => {
-  const products = await Product.find({ type: ["wience", "sztuczne-wience"] });
-  res.render("wreaths", { products });
+  const productsAmount = await getProductNum(Product.find({ type: ["wience", "sztuczne-wience"] }), res.locals.currentUser);
+  const products = await pagination(Product.find({ type: ["wience", "sztuczne-wience"] }), req.query.p);
+  res.render("wreaths", { products, productsAmount });
 };
 
 // show funeral
 module.exports.funeral = async (req, res) => {
-  const products = await Product.find({ categories: { $in: "pogrzeb" } });
-  res.render("products", { products });
+  const productsAmount = await getProductNum(Product.find({ categories: { $in: "pogrzeb" } }), res.locals.currentUser);
+  const products = await pagination(Product.find({ categories: { $in: "pogrzeb" } }), req.query.p);
+  res.render("products", { products, productsAmount });
 };
 
 // show wreaths
 module.exports.wreaths = async (req, res) => {
-  const products = await Product.find({ type: "wience" });
-  res.render("products", { products });
+  const productsAmount = await getProductNum(Product.find({ type: "wience" }), res.locals.currentUser);
+  const products = await pagination(Product.find({ type: "wience" }), req.query.p);
+  res.render("products", { products, productsAmount });
 };
 
 // show wreaths
 module.exports.artificialWreaths = async (req, res) => {
-  const products = await Product.find({ type: "sztuczne-wience" });
-  res.render("products", { products });
+  const productsAmount = await getProductNum(Product.find({ type: "sztuczne-wience" }), res.locals.currentUser);
+  const products = await pagination(Product.find({ type: "sztuczne-wience" }), req.query.p);
+  res.render("products", { products, productsAmount });
 };

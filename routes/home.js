@@ -22,8 +22,6 @@ router.get("/kontakt", (req, res) => {
 
 // Delete product image
 router.delete("/kwiaty/:id/photos/:photoId", async (req, res) => {
-  console.log("working");
-  console.log(req.body);
   const { id, photoId } = req.params;
   const product = await Product.findById(id);
   fs.unlinkSync("./public/photos/" + req.body.deletedImg);

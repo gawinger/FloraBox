@@ -698,6 +698,31 @@ main {
   font-weight: bold;
 }
 
+.product-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-page a {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #618b4a;
+  transition: all 0.5s;
+}
+
+.product-page a:hover {
+  background-color: #618b4a;
+}
+
+.product-page .current-page {
+  background-color: #618b4a;
+}
+
 .show-product {
   margin-bottom: 70px;
   background-color: white;
