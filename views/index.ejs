@@ -107,4 +107,12 @@
       <% } %>
   <% }) %>
   </div>
+  <% if(typeof productsAmount !== undefined && productsAmount > 1){ %>  
+    <div class="product-page">
+      <a href="/kwiaty" class="page-1">1</a>
+      <% for(let i=2; i <= productsAmount; i++){ %> 
+      <a href="/kwiaty?p=<%= i %>" class="page-<%=i%>"><%= i %></a>
+      <% } %> 
+    </div>
+    <% } %> 
 </section>

@@ -1,32 +1,11 @@
 const Product = require("../models/product");
 const fs = require("fs");
+const { pagination, getProductNum } = require("../public/utils/pagination");
+const { createCreator, editCreator } = require("../public/utils/createCreator");
 
 // function for product search functionality
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-}
-
-// Pagination functionality
-async function pagination(collection, p, l) {
-  let page = 1;
-  limit = 12;
-  if (p) page = parseInt(p);
-  if (l) limit = parseInt(l);
-  const skip = (page - 1) * limit;
-  return await collection.skip(skip).limit(limit);
-}
-
-// Get amount of products
-async function getProductNum(collection, user, l) {
-  let productsAmount = (await collection.countDocuments({})) - (await collection.countDocuments({ hidden: true }));
-  if (user && user.role === "admin") {
-    productsAmount = await collection.countDocuments({});
-  }
-  if (!productsAmount) productsAmount = 0;
-  console.log(l);
-  let limit = 12;
-  if (l) limit = parseInt(l);
-  return productsAmount / limit;
 }
 
 // show all product
@@ -56,38 +35,12 @@ module.exports.createProduct = async (req, res) => {
   if (product.categories.includes("pogrzeb")) product.categories = ["pogrzeb"];
   if (req.body.type === "creation") {
     product.categories = ["kreator bukietów"];
-    const creatorData = [];
-    // into creator data push object with category name and options
-    for (let i = 1; i <= req.body.creatorAmount; i++) {
-      const keys = Object.keys(req.body);
-      const optionAmount = keys.filter((key) => key.includes(`creator${i}Option`)).length / 2;
-      const optionData = {};
-      // add category name to optionData object
-      optionData.categoryName = req.body[`creatorCategory${i}`];
-      // iterate throught all options and add them to optionData object
-      for (let j = 1; j <= optionAmount; j++) {
-        // if priceChange value is not provided set it to 0
-        if (req.body[`creator${i}Option${j}Change`] === "") {
-          req.body[`creator${i}Option${j}Change`] = 0;
-        }
-        optionData["option" + j] = {
-          optionName: req.body[`creator${i}Option${j}`],
-          priceChange: req.body[`creator${i}Option${j}Change`],
-        };
-      }
-      // push option data into creator data
-      creatorData.push(optionData);
-    }
-    product.creatorData = creatorData;
-  }
-  // if user is trying to add more than 5 files flash error
-  if (req.files.length > 5) {
-    req.flash("error", "Produkt może mieć maksymalnie 4 zdjęcia");
-    return red.redirect(`/kwiaty/edytuj/${product.id}`);
+    product.creatorData = await createCreator(req.body);
   }
   // map through provided files and check if files length is lower than 5
   const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
-  if (imgs.length + product.images.length >= 5) {
+  // if user is trying to add more than 5 files flash error
+  if (req.files.length > 5 || imgs.length + product.images.length >= 5) {
     req.flash("error", "Produkt może mieć maksymalnie 4 zdjęcia");
     return res.redirect(`/kwiaty/edytuj/${product.id}`);
   }
@@ -149,7 +102,9 @@ module.exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
   const product = await Product.findByIdAndDelete(id);
   product.images.forEach((e) => {
-    fs.unlinkSync("./public/photos/" + e.filename);
+    if (e.filename) {
+      fs.unlinkSync("./public/photos/" + e.filename);
+    }
   });
   req.flash("success", "Produkt został usunięty");
   res.redirect("/kwiaty");
@@ -165,45 +120,26 @@ module.exports.editForm = async (req, res) => {
 // edit product
 module.exports.editProduct = async (req, res) => {
   const { id } = req.params;
+  const product = await Product.findByIdAndUpdate(id, { ...req.body });
   // if type of product is creation, noOccasion or funeral then add it as products category
   if (product.categories.includes("bez-okazji")) product.categories = ["bez-okazji"];
   if (product.categories.includes("pogrzeb")) product.categories = ["pogrzeb"];
   if (req.body.type === "creation") {
+    const creatorData = createCreator(req.body);
     product.categories = ["kreator bukietów"];
-    const optionData = {};
-    // add category name to optionData object
-    optionData.categoryName = req.body[`creatorCategory${i}`];
-    // iterate throught all options and add them to optionData object
-    for (let j = 1; j <= optionAmount; j++) {
-      // if priceChange value is not provided set it to 0
-      if (req.body[`creator${i}Option${j}Change`] === "") {
-        req.body[`creator${i}Option${j}Change`] = 0;
-      }
-      optionData["option" + j] = {
-        optionName: req.body[`creator${i}Option${j}`],
-        priceChange: req.body[`creator${i}Option${j}Change`],
-      };
-    }
-    // push option data into creator data
-    creatorData.push(optionData);
     product.creatorData = creatorData;
   }
-  const product = await Product.findByIdAndUpdate(id, { ...req.body });
   // map through provided files and check if files length is lower than 5
   const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
   if (imgs.length + product.images.length >= 5) {
     req.flash("error", "Produkt może mieć maksymalnie 4 zdjęć");
-    return res.redirect(`/kwiaty/edytuj/${product.id}`);
+    res.redirect(`/kwiaty/edytuj/${product.id}`);
   } else {
     // push images into product object
     product.images.push(...imgs);
     product.hidden = true;
     await product.save();
-    if (product.type === "creation") {
-      res.redirect(`/kreator/${product.id}`);
-    } else {
-      res.redirect(`/kwiaty/${product.id}`);
-    }
+    res.redirect(`/kwiaty/${product.id}`);
   }
 };
 

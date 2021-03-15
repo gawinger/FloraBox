@@ -2,11 +2,14 @@ const express = require("express");
 const Product = require("../models/product");
 const router = express.Router();
 const fs = require("fs");
+const { pagination, getProductNum } = require("../public/utils/pagination");
 
 // Show home page
 router.get("/", async (req, res) => {
-  const products = await Product.find({ type: { $ne: "creation" } });
-  res.render("index", { products });
+  const productsAmount = await getProductNum(Product.find({ type: { $ne: "creation" } }), res.locals.currentUser, req.query.limit);
+  const products = await pagination(Product.find({ type: { $ne: "creation" } }), req.query.p, req.query.limit);
+  console.log(productsAmount);
+  res.render("index", { products, productsAmount });
 });
 
 // Show cart page
