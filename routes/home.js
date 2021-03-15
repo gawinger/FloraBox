@@ -8,7 +8,6 @@ const { pagination, getProductNum } = require("../public/utils/pagination");
 router.get("/", async (req, res) => {
   const productsAmount = await getProductNum(Product.find({ type: { $ne: "creation" } }), res.locals.currentUser, req.query.limit);
   const products = await pagination(Product.find({ type: { $ne: "creation" } }), req.query.p, req.query.limit);
-  console.log(productsAmount);
   res.render("index", { products, productsAmount });
 });
 
@@ -27,8 +26,9 @@ router.get("/kontakt", (req, res) => {
 router.delete("/kwiaty/:id/photos/:photoId", async (req, res) => {
   const { id, photoId } = req.params;
   const product = await Product.findById(id);
-  fs.unlinkSync("./public/photos/" + req.body.deletedImg);
-  await product.updateOne({ $pull: { images: { _id: { $in: photoId } } } }, { new: true });
+  fs.unlinkSync("./public/uploads/regulars/" + req.body.deletedImg);
+  fs.unlinkSync("./public/uploads/thumbnails/" + req.body.deletedImg);
+  await product.updateOne({ $pull: { images: { $in: photoId } } }, { new: true });
   await product.save();
   req.flash("success", "Pomyślnie usunięto zdjęcie produktu");
   res.redirect(`/kwiaty/edytuj/${id}`);

@@ -1,17 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const storage = multer.memoryStorage();
-const uploads = multer({ storage });
+const sharp = require("sharp");
+const uploads = multer({ storage: multer.memoryStorage() });
 const products = require("../controllers/products");
 const { isAdmin } = require("../public/utils/middleware");
+
+const resizeImages = async (req, res, next) => {
+  if (!req.files) return next();
+  req.body.images = [];
+  await Promise.all(
+    req.files.map(async (file) => {
+      const newFilename = file.originalname;
+      await sharp(file.buffer).resize(350, 350).toFormat("jpeg").jpeg({ quality: 90 }).toFile(`public/uploads/thumbnails/${newFilename}`);
+      await sharp(file.buffer).resize(800, 800).toFormat("jpeg").jpeg({ quality: 100 }).toFile(`public/uploads/regulars/${newFilename}`);
+      req.body.images.push(newFilename);
+    })
+  );
+  next();
+};
 
 router
   .route("/kwiaty")
   // show all products
   .get(products.productsAll)
   // create new product
-  .post(isAdmin, uploads.array("image"), products.createProduct);
+  .post(isAdmin, uploads.array("image"), resizeImages, products.createProduct);
 
 router
   .route("/kwiaty/okazje")
@@ -50,7 +64,7 @@ router
   // render form to edit product
   .get(isAdmin, products.editForm)
   // edit product
-  .put(isAdmin, uploads.array("image"), products.editProduct);
+  .put(isAdmin, uploads.array("image"), resizeImages, products.editProduct);
 
 router
   .route("/kwiaty/widocznosc/:id")

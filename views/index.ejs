@@ -70,7 +70,7 @@
           <a href="/kwiaty/<%= product.id %>" title="<%= product.name %>">
           <div class="product-img">
             <% if(product.images.length) {%>
-              <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
+              <img src="/uploads/thumbnails/<%= product.images[0] %> " alt="<%= product.name %>" />
               <% } %>
             </a>
             </div>
@@ -90,7 +90,7 @@
         <a href="/kwiaty/<%= product.id %>" title="<%= product.name %>">
         <div class="product-img">
           <% if(product.images.length) {%>
-            <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
+            <img src="/uploads/thumbnails/<%= product.images[0] %> " alt="<%= product.name %>" />
             <% } %>
           </a>
           </div>

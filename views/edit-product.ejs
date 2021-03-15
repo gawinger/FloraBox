@@ -5,10 +5,10 @@
     <div class="images-edit-list">
       <% product.images.forEach((img)=>{ %>
       <div class="image-edit-container">
-        <form action="/kwiaty/<%= product.id %>/photos/<%=img._id%>?_method=DELETE " method="POST" class="image-delete-form">
-          <button type="submit" class="delete-img-btn" name="deletedImg" value="<%= img.filename %>"><i class="far fa-trash-alt"></i></button>
+        <form action="/kwiaty/<%= product.id %>/photos/<%=img%>?_method=DELETE " method="POST" class="image-delete-form">
+          <button type="submit" class="delete-img-btn" name="deletedImg" value="<%= img %>"><i class="far fa-trash-alt"></i></button>
         </form>
-        <img class="image-edit" src="/photos/<%=img.filename%>" alt="<%=img._id%>" />
+        <img class="image-edit" src="/uploads/thumbnails/<%=img%>" alt="<%=img._id%>" />
       </div>
       <% }) %>
     </div>

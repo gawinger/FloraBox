@@ -12,7 +12,7 @@
         <div class="product-img-zoom-list">
           <% product.images.forEach(image=>{ %>
           <div class="list-img">
-            <img src="/photos/<%= image.filename %> " alt="<%= product.name %>" />
+            <img src="/uploads/regulars/<%= image.filename %> " alt="<%= product.name %>" />
           </div>
           <% }) %>
         </div>
@@ -20,17 +20,16 @@
     </div>
     <div class="product-col product-images">
       <div class="product-img">
-        <img src="/photos/<%= product.images[0].filename %> " alt="<%= product.name %>" />
+        <img src="/uploads/regulars/<%= product.images[0] %> " />
       </div>
       <div class="product-img-list">
         <% product.images.slice(1).forEach(image=>{ %>
         <div class="product-thumbnail">
-          <img src="/photos/<%= image.filename %> " alt="<%= product.name %>" />
+          <img src="/uploads/regulars/<%= image %> " alt="<%= product.name %>" />
         </div>
         <% }) %>
       </div>
     </div>
-
     <div class="product-col product-desc">
       <div class="product-name"><%= product.name %></div>
       <% if(product.onPromo === "true") {%>

@@ -1,10 +1,4 @@
-const { boolean } = require("joi");
 const mongoose = require("mongoose");
-
-const ImageSchema = new mongoose.Schema({
-  url: String,
-  filename: String,
-});
 
 const ProductSchema = new mongoose.Schema({
   name: {
@@ -23,7 +17,9 @@ const ProductSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  images: [ImageSchema],
+  images: {
+    type: [String],
+  },
   categories: {
     type: [String],
     required: true,

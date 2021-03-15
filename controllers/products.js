@@ -1,7 +1,8 @@
 const Product = require("../models/product");
 const fs = require("fs");
 const { pagination, getProductNum } = require("../public/utils/pagination");
-const { createCreator, editCreator } = require("../public/utils/createCreator");
+const { createCreator } = require("../public/utils/createCreator");
+const sharp = require("sharp");
 
 // function for product search functionality
 function escapeRegex(text) {
@@ -37,15 +38,11 @@ module.exports.createProduct = async (req, res) => {
     product.categories = ["kreator bukietów"];
     product.creatorData = await createCreator(req.body);
   }
-  // map through provided files and check if files length is lower than 5
-  const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
   // if user is trying to add more than 5 files flash error
-  if (req.files.length > 5 || imgs.length + product.images.length >= 5) {
+  if (req.body.images.length > 5 || req.body.images.length + product.images.length >= 5) {
     req.flash("error", "Produkt może mieć maksymalnie 4 zdjęcia");
     return res.redirect(`/kwiaty/edytuj/${product.id}`);
   }
-  // push images into product object
-  product.images.push(...imgs);
   product.hidden = true;
   await product.save();
   res.redirect(`kwiaty/${product.id}`);
@@ -102,9 +99,8 @@ module.exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
   const product = await Product.findByIdAndDelete(id);
   product.images.forEach((e) => {
-    if (e.filename) {
-      fs.unlinkSync("./public/photos/" + e.filename);
-    }
+    fs.unlinkSync("./public/uploads/regulars/" + e);
+    fs.unlinkSync("./public/uploads/thumbnails/" + e);
   });
   req.flash("success", "Produkt został usunięty");
   res.redirect("/kwiaty");
@@ -120,7 +116,10 @@ module.exports.editForm = async (req, res) => {
 // edit product
 module.exports.editProduct = async (req, res) => {
   const { id } = req.params;
+  const oldProduct = await Product.findById(id);
+  const oldImages = oldProduct.images;
   const product = await Product.findByIdAndUpdate(id, { ...req.body });
+  req.body.images.forEach((img) => product.images.unshift(img));
   // if type of product is creation, noOccasion or funeral then add it as products category
   if (product.categories.includes("bez-okazji")) product.categories = ["bez-okazji"];
   if (product.categories.includes("pogrzeb")) product.categories = ["pogrzeb"];
@@ -130,13 +129,11 @@ module.exports.editProduct = async (req, res) => {
     product.creatorData = creatorData;
   }
   // map through provided files and check if files length is lower than 5
-  const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename }));
-  if (imgs.length + product.images.length >= 5) {
-    req.flash("error", "Produkt może mieć maksymalnie 4 zdjęć");
-    res.redirect(`/kwiaty/edytuj/${product.id}`);
+  if (req.body.images.length > 5 || req.body.images.length + oldImages.length >= 5) {
+    req.flash("error", "Produkt może mieć maksymalnie 4 zdjęcia");
+    return res.redirect(`/kwiaty/edytuj/${product.id}`);
   } else {
     // push images into product object
-    product.images.push(...imgs);
     product.hidden = true;
     await product.save();
     res.redirect(`/kwiaty/${product.id}`);
