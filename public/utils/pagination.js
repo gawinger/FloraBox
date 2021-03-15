@@ -15,8 +15,7 @@ module.exports.getProductNum = async (collection, user, l) => {
     productsAmount = await collection.countDocuments({});
   }
   if (!productsAmount) productsAmount = 0;
-  console.log(l);
   let limit = 12;
   if (l) limit = parseInt(l);
-  return Math.ceil(productsAmount / limit);
+  return await Math.ceil(productsAmount / limit);
 };

@@ -39,9 +39,9 @@ module.exports.createProduct = async (req, res) => {
     product.creatorData = await createCreator(req.body);
   }
   // if user is trying to add more than 5 files flash error
-  if (req.body.images.length > 5 || req.body.images.length + product.images.length >= 5) {
+  if (product.images.length > 4) {
     req.flash("error", "Produkt może mieć maksymalnie 4 zdjęcia");
-    return res.redirect(`/kwiaty/edytuj/${product.id}`);
+    return res.render("new-product");
   }
   product.hidden = true;
   await product.save();

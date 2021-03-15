@@ -31,9 +31,10 @@ const updateCart = async () => {
       currentPrice = price;
     }
 
+    console.log(image);
     cartItem = `
         <div class="cart-item" data-id="${id}">
-          <a href="/kwiaty/${id}"><div class="item-img"><img src="/photos/${image.filename}"/></div></a>
+          <a href="/kwiaty/${id}"><div class="item-img"><img src="/uploads/thumbnails/${image}"/></div></a>
           <div class="item-data">
           <a href="/kwiaty/${id}"><div class="item-name">${name}</div></a>
             <div class="item-description">${shortDesc}</div>
