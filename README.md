@@ -21,3 +21,5 @@ I constantly add functionality to this website to provide best user experience. 
   - product image zoom functionality.
 
 Additionally, I try to keep the project protected against the most common security issues like cross site scripting or HTML injection.
+
+View Live: https://florabox.bartoszczupryna.com/
