@@ -1,10 +1,10 @@
 # FloraBox
-Online store imitation on the example of a florist with full functionality except for payments. 
-This is my most extensive project so far. I plan on running it soon as a true online florist. 
+Online store imitation on the example of a florist with full functionality except for payments. \
+This is my most extensive project so far. I plan on running it soon as a true online florist. \
 
 ## Used technologies
-Project is created using javascript and node.js with express.js.
-It uses mongoDB with mongoose to store data about users and products.
+Project is created using **javascript** and **node.js** with **express.js**.\
+It uses **mongoDB** with **mongoose** to store data about users and products.
 
 ## Functionality
 I constantly add functionality to this website to provide best user experience. So far I added:
